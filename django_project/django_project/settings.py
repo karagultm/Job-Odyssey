@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
-    'job_odyssey',
+    'resume',
+    'users',
+    
     'widget_tweaks',
 ]
 
@@ -125,5 +127,5 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'job_odyssey.User'
-AUTHENTICATION_BACKENDS = ['job_odyssey.backends.EmailBackend']
+AUTH_USER_MODEL = 'users.User'
+AUTHENTICATION_BACKENDS = ['users.backends.EmailBackend']
