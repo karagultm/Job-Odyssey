@@ -14,7 +14,6 @@
 3.2.14 My Posts Page
 
 
-
 3.2.1 Home Pages
 The home page serves as the entry point to the website and includes a navigation bar, a footer, sign-up/login options for personal and corporate users, a search box for job searching, and job advertisement cards at the bottom. 
 		3.2.1.1 Processing Narrative (PSPEC) for Home Page
