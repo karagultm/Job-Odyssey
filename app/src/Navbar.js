@@ -16,7 +16,9 @@ const Navbar = () => {
                 <Link to="/kayit-ol">
                     <button className="btn blue">Kayıt Ol</button>
                 </Link>
-                <button className="btn red">Şirketler İçin</button>
+                <Link to="/kayit-ol-company">
+                    <button className="btn red">Şirket Kayıt</button>
+                </Link>
                 <select className="language-select">
                     <option value="tr">TR</option>
                     <option value="en">EN</option>

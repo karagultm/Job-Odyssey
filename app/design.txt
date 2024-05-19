@@ -1,0 +1,319 @@
+3.2.1 Home Page	10
+3.2.2 Personal Login Page	11
+3.2.3 Corporate Login Page	12
+3.2.4 Personal Sign-Up Page	13
+3.2.5 Corporate Sign-Up Page	14
+3.2.6 Jobs Page	16
+3.2.7 Job Post Page	17
+3.2.8 Other Jobs Page	19
+3.2.9 Create Jobs Page	21
+3.2.10 Applicants Page	22
+3.2.11 My Profile Page	24
+3.2.12 Applied Jobs Page	26
+3.2.13 Company Profile Page	28
+3.2.14 My Posts Page
+
+
+
+3.2.1 Home Pages
+The home page serves as the entry point to the website and includes a navigation bar, a footer, sign-up/login options for personal and corporate users, a search box for job searching, and job advertisement cards at the bottom. 
+		3.2.1.1 Processing Narrative (PSPEC) for Home Page
+The home page is responsible for providing users with navigation options, facilitating user authentication (sign-up/login), offering job search functionality, and displaying job advertisements.
+		3.2.1.2 Home Page Interface Description	
+Input Interfaces:
+User inputs for sign-up/login credentials.
+User inputs for job search queries.
+Output Interfaces:
+Display of navigation elements (navbar, footer).
+Presentation of job advertisement cards.
+Results of job search queries.
+		3.2.1.3 Home Page Processing Detail
+Navigation Bar and Footer:
+Displayed statically across the page.
+Sign-Up/Login:
+Separate sections for personal and corporate users.
+Authentication process for user access.
+Search Box:
+Accepts user input for job search queries.
+Utilizes web scraping to find relevant job listings.
+Job Advertisement Cards:
+Dynamically populated based on available job listings.
+
+
+3.2.2 Personal Login Page
+The Basic Login Screen provides a simple interface for users to authenticate into the system. It consists of email and password text boxes and a login button.
+		3.2.2.1 Processing Narrative (PSPEC) for Personal Login Page
+The Basic Login Screen is responsible for collecting user credentials and initiating the authentication process.
+		3.2.2.2 Personal Login Page Interface Description
+Input Interfaces:
+Email text box: Allows users to input their email addresses.
+Password text box: Allows users to input their passwords.
+Output Interfaces:
+Login button: Initiates the authentication process.
+		3.2.2.3 Personal Login Page Processing Detail
+User Authentication:
+Upon clicking the login button, the system verifies the provided email and password against the stored user credentials.
+If the credentials are valid, the user is granted access to the system.
+If the credentials are invalid, an error message is displayed indicating authentication failure.
+
+
+3.2.3 Corporate Login Page
+The Corporate Login Screen provides a login interface specifically tailored for companies or corporate users. It includes email and password text boxes and a login button.
+		3.2.3.1 Processing Narrative (PSPEC) for Corporate Login Page
+The Corporate Login Screen is responsible for collecting company-specific user credentials and initiating the authentication process.
+		3.2.3.2 Corporate Login Page Interface Description
+Input Interfaces:
+Email text box: Allows users to input their corporate email addresses.
+Password text box: Allows users to input their passwords.
+Output Interfaces:
+Login button: Initiates the authentication process.
+		3.2.3.3 Corporate Login Page Processing Detail
+User Authentication:
+Upon clicking the login button, the system verifies the provided corporate email and password against the stored company user credentials.
+If the credentials are valid, the user is granted access to the company's system.
+If the credentials are invalid, an error message is displayed indicating authentication failure.
+
+
+3.2.4 Personal Sign-Up Page
+The Personal Sign-Up Screen provides a user interface for individuals to create a new account. It includes text boxes for entering user details, a sign-up button, and a fast Google sign-up button.
+		3.2.4.1 Processing Narrative (PSPEC) for Personal Sign-Up Page
+The Personal Sign-Up Screen is responsible for collecting user information, validating the input, and creating a new user account in the system. It also offers an option for quick account creation via Google authentication.
+		3.2.4.2 Personal Sign-Up Page Interface Description
+Input Interfaces:
+Name text box: Allows users to input their first name.
+Surname text box: Allows users to input their surname.
+Username text box: Allows users to choose a unique username.
+Email text box: Allows users to input their email address.
+Password text box: Allows users to input a password.
+Password again text box: Allows users to confirm their password.
+Output Interfaces:
+Sign-up button: Initiates the sign-up process.
+Fast Google sign-up button: Initiates the sign-up process using Google account authentication.
+		3.2.4.3 Personal Sign-Up Page Processing Detail
+User Information Collection:
+Users fill in the text boxes with their details.
+Input Validation:
+Validate that all required fields are filled.
+Ensure the email address is in a valid format.
+Check that the username is unique.
+Ensure the password meets security requirements (e.g., length, complexity).
+Confirm that both password entries match.
+Account Creation:
+If validation passes, create a new user account with the provided details.
+Store the user information securely in the database.
+Google Sign-Up:
+Redirect users to Google for authentication.
+Retrieve user information from Google upon successful authentication.
+Create a new user account or link to an existing account if the Google email is already registered.
+
+
+3.2.5 Corporate Sign-Up Page
+The Corporate Sign-Up Screen provides a user interface for companies to create a new corporate account. It includes text boxes for entering company and user details, a list choices button for selecting the number of employees, and a sign-up button.
+		3.2.5.1 Processing Narrative (PSPEC) for Corporate Sign-Up Page
+The Corporate Sign-Up Screen is responsible for collecting company-specific information, validating the input, and creating a new corporate account in the system.
+		3.2.5.2 Corporate Sign-Up Page Interface Description
+Input Interfaces:
+Short Company Name text box: Allows users to input the company's short name.
+Company Email text box: Allows users to input the company's email address.
+Password text box: Allows users to input a password.
+Password (again) text box: Allows users to confirm the password.
+User Name text box: Allows users to input a username for the company representative.
+Number of Employees list choices button: Allows users to select the number of employees from a predefined list.
+Output Interfaces:
+Sign-up button: Initiates the corporate sign-up process.
+		3.2.5.3 Corporate Sign-Up Page Processing Detail
+Company Information Collection:
+Users fill in the text boxes with company and user details.
+Users select the number of employees from a list.
+Input Validation:
+Validate that all required fields are filled.
+Ensure the company email address is in a valid format.
+Check that the username is unique.
+Ensure the password meets security requirements (e.g., length, complexity).
+Confirm that both password entries match.
+Account Creation:
+If validation passes, create a new corporate account with the provided details.
+Store the company and user information securely in the database.
+
+
+3.2.6 Jobs Page
+The Jobs Page displays a list of job cards, each introducing a job and providing basic information such as department, salary, and other relevant details.
+		3.2.6.1 Processing Narrative (PSPEC) for Jobs Page
+The Jobs Page is responsible for retrieving and displaying job listings in the form of job cards. Each job card provides a brief overview of the job, including essential details to help users identify suitable opportunities.
+		3.2.6.2 Jobs Page Interface Description
+Input Interfaces:
+Filter and search options: Allow users to refine job listings based on criteria like department, salary range, location, etc.
+Output Interfaces:
+Job cards: Display job details including job title, department, salary, location, and a brief description.
+		3.2.6.3 Jobs Page Processing Detail
+Job Retrieval:
+Retrieve job listings from the database or external API.
+Apply any filters or search criteria specified by the user.
+Job Card Display:
+Dynamically generate job cards based on the retrieved job data.
+Each card includes:
+Job title
+Department
+Salary
+Location
+Brief description or summary of the job
+A link or button to view more details or apply for the job
+
+
+3.2.7 Job Post Page
+The Job Post Page provides detailed information about a specific job. It is accessed by clicking on a job card from the Jobs Page. The page includes a job picture, job description, required qualifications, company information, job type, application deadline, job location, and an apply button.
+		3.2.7.1 Processing Narrative (PSPEC) for Job Post Page
+The Job Post Page is responsible for displaying comprehensive details about a selected job. It should fetch and present job-specific data to provide users with all necessary information to consider and apply for the job.
+		3.2.7.2 Job Post Page Interface Description
+Input Interfaces:
+Job card selection: Redirect from the Jobs Page when a job card is clicked.
+Output Interfaces:
+Job picture: Displays an image related to the job or company.
+Job description: Provides a detailed description of the job responsibilities.
+Required qualifications: Lists the qualifications needed for the job.
+About company: Provides information about the hiring company.
+Job type: Indicates the type of job (e.g., internship, senior position).
+Application deadline: Shows the deadline to apply for the job.
+Job location: Specifies the location of the job.
+Apply button: Allows users to apply for the job.
+		3.2.7.3 Job Post Page Processing Detail
+Job Data Retrieval:
+Fetch detailed job data from the database or external API based on the job ID passed from the job card.
+Job Information Display:
+Display the job picture, if available.
+Present the job description clearly.
+List the required qualifications.
+Provide a section about the company.
+Indicate the job type.
+Show the application deadline.
+Specify the job location.
+Apply Functionality:
+When the apply button is clicked, redirect to the application form or process.
+Handle user authentication if necessary before applying.
+Design Class Hierarchy for Job Post Page:
+
+
+3.2.8 Other Jobs Page
+The Other Jobs Page provides a search interface for users to find external job listings from the internet using web scraping. It includes a search bar for entering job queries, a filter for location, and displays a list of matching jobs with job names and links.
+		3.2.8.1 Processing Narrative (PSPEC) for Other Jobs Page
+The Other Jobs Page is responsible for collecting job search queries and location filters from the user, performing web scraping to retrieve matching job listings from external sources, and displaying the results as a list of job names with corresponding links.
+		3.2.8.2 Other Jobs Page Interface Description
+Input Interfaces:
+Search bar: Allows users to input job search queries.
+Location filter: Allows users to specify a location to filter job results.
+Output Interfaces:
+Job list: Displays job names and links to the job postings.
+		3.2.8.3 Other Jobs Page Processing Detail
+User Input Collection:
+Users enter job search queries into the search bar.
+Users select a location filter to narrow down the job search results.
+Web Scraping and Job Retrieval:
+Perform web scraping based on the search query and location filter.
+Retrieve job listings from multiple external job sites.
+Job Listing Display:
+Display the retrieved jobs in a list format.
+Each entry in the list includes:
+Job name
+Job link
+
+
+3.2.9 Create Jobs Page
+The Create Jobs Page allows companies to post new job listings by entering detailed job information. It includes fields for job description, required qualifications, job picture, job type, department, location, application deadline, and a post button to share the job.
+		3.2.9.1 Processing Narrative (PSPEC) for Create Jobs Page
+The Create Jobs Page is responsible for collecting job details from companies, validating the input, and creating a new job listing in the system which can then be viewed by job seekers.
+		3.2.9.2 Create Jobs Page Interface Description
+Input Interfaces:
+Job Description text area: Allows companies to provide a detailed description of the job.
+Required Qualifications text area: Allows companies to list the qualifications needed for the job.
+Job Picture upload: Allows companies to upload an image related to the job or company.
+Job Type dropdown: Allows companies to select the type of job (e.g., internship, full-time, part-time, senior position).
+Department text box: Allows companies to specify the department for the job.
+Location text box: Allows companies to specify the job location.
+Application Deadline date picker: Allows companies to set the deadline for applications.
+Post button: Submits the job listing for posting.
+		3.2.9.3 Create Jobs Page Processing Detail
+Company Input Collection:
+Companies fill in the fields with job details.
+Input Validation:
+Validate that all required fields are filled.
+Ensure the job picture file is in an acceptable format (e.g., JPG, PNG).
+Check that the application deadline is a future date.
+Job Posting:
+If validation passes, save the job details to the database.
+Notify the company of successful job postings.
+
+
+3.2.10 Applicants Page
+The Applicants Page allows companies to view and manage the list of applicants who have applied for a specific job posting. This page provides options to contact applicants, reject them, or mark them as candidates. The list displays the profile picture, name, and related information for each applicant.
+		3.2.10.1 Processing Narrative (PSPEC) for Applicants Page
+The Applicants Page is responsible for displaying the list of individuals who have applied to a job posting, showing their profile details, and providing companies with the functionality to manage these applications (contact, reject, shortlist).
+		3.2.10.2 Applicants Page Interface Description
+Input Interfaces:
+Interaction from the company's actions on job postings (e.g., clicking on a job to view applicants).
+Output Interfaces:
+List of applicants with profile details and management options.
+		3.2.10.3 Applicants Page Processing Detail
+Applicant Information Retrieval:
+Retrieve information about applicants for the selected job posting.
+Display the profile picture, name, and relevant details for each applicant.
+Application Management:
+Provide options to contact, reject, or mark applicants as candidates.
+Update the status of applicants based on the company's actions.
+
+
+3.2.11 My Profile Page
+The My Profile Page serves as a comprehensive CV and cover letter for job seekers. Companies can view this page when a user applies for a job. It includes detailed personal, educational, and professional information.
+		3.2.11.1 Processing Narrative (PSPEC) for My Profile Page
+The My Profile Page is responsible for displaying a user's complete profile information, allowing companies to review it when considering job applications. Users can enter, update, and save their information through this page.
+		3.2.11.2 My Profile Page Interface Description
+Input Interfaces:
+Various text boxes, text areas, dropdowns, and checkboxes for entering profile information.
+Output Interfaces:
+Display fields showing the entered information in a structured and readable format.
+		3.2.11.3 My Profile Page Processing Detail
+User Information Collection:
+Users fill in various fields with their personal, educational, and professional details.
+Information Display:
+Display the collected information in a formatted manner for company review.
+Information Update:
+Allow users to update and save their information as needed.
+
+
+3.2.12 Applied Jobs Page
+The Applied Jobs Page lists all the jobs a user has applied for. It provides job information, tracks the application status, and indicates if a job application has been rejected.
+		3.2.12.1 Processing Narrative (PSPEC) for Applied Jobs Page
+The Applied Jobs Page is responsible for displaying a list of jobs the user has applied for. It shows job details and the status of each application, allowing users to track their application progress and see if they have been rejected.
+		3.2.12.2 Applied Jobs Page Interface Description
+Input Interfaces:
+Interaction from the user's job application actions (applying to jobs).
+Output Interfaces:
+List of applied jobs with job details and application status.
+		3.2.12.3 Applied Jobs Page Processing Detail
+Job Application Tracking:
+Store information about jobs the user has applied for.
+Update and display the status of each job application.
+Application Status Display:
+Show current status (e.g., pending, accepted, rejected) for each job application.
+Indicate rejection notifications from companies.
+
+
+
+3.2.13 Company Profile Page
+The Company Profile Page allows companies to introduce themselves by adding photos, videos, and text about their culture. Users can view published jobs from the company and see an overview of the company's details, including location, year of founding, number of employees, website, and social media accounts.
+		3.2.13.1 Processing Narrative (PSPEC) for Company Profile Page
+The Company Profile Page is responsible for displaying comprehensive information about a company, including multimedia content and job listings. It allows companies to showcase their culture and details, providing users with a clear overview of the company.
+		3.2.13.2 Company Profile Page Interface Description
+Input Interfaces:
+Forms and upload tools for companies to add photos, videos, and text.
+Fields for entering company details such as location, year of founding, number of employees, website, and social media accounts.
+Output Interfaces:
+Display of company photos, videos, and cultural text.
+List of published jobs from the company.
+Overview section with company details.
+		3.2.13.3 Company Profile Page Processing Detail
+Company Information Collection:
+Companies input their details, upload media, and provide text about their culture.
+Information Display:
+Display multimedia content (photos, videos) and cultural text.
+Show company details (location, year of founding, employees number, website, social media accounts).
+List the jobs published by the company.

@@ -1,0 +1,20 @@
+.home {
+    padding: 20px;
+}
+
+.home-header {
+    text-align: center;
+    background-color: #007bff;
+    padding: 40px 0;
+    color: white;
+}
+
+
+.job-section, .all-jobs-section {
+    margin-top: 40px;
+}
+
+.job-section h2, .all-jobs-section h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}

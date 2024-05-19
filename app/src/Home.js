@@ -1,11 +1,30 @@
-import React from "react";
-
+import React from 'react';
+import './Home.css';
+import Searchbar from './Searchbar';
+import Cards from './Cards';
 
 const Home = () => {
-
     return (
-        <div>
-            <h1>Home</h1>
+        <div className="home">
+            <div className="home-header">
+                <h1>İlanları Keşfet</h1>
+                <div className="search-box">
+                    <Searchbar />
+                </div>
+            </div>
+            <div className="job-section">
+                <h2>Öne Çıkan İlanlar</h2>
+                {/* Burada öne çıkan iş ilanlarını göstereceğiz */}
+            </div>
+            <div className="all-jobs-section">
+                <h2>Tüm İlanlar</h2>
+                <div className="cards-container">
+                    <Cards />
+                    <Cards />
+                    <Cards />
+                    {/* Burada tüm iş ilanlarını göstereceğiz */}
+                </div>
+            </div>
         </div>
     );
 }
