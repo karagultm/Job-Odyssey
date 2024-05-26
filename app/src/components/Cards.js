@@ -1,5 +1,5 @@
 import React from 'react';
-import './Cards.css';
+import '../styles/Cards.css';
 
 const CARD_CLASS = "bg-white rounded-lg shadow-md";
 const PROFILE_IMG_CLASS = "w-8 h-8 rounded-full mr-2";

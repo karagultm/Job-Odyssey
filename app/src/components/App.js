@@ -1,13 +1,13 @@
 import React from 'react';
-import './App.css';
+import '../styles/App.css';
 import Navbar from './Navbar';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Register_personal from './Register_personal';
+import RegisterApplicant from './RegisterApplicant';
 import Home from './Home';
 import Companies from './Companies';
 import Jobs from './Jobs';
 import Footer from './Footer';
-import Register_company from './Register_company';
+import RegisterCompany from './RegisterCompany';
 
 function App() {
   return (
@@ -19,8 +19,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/sirketler" element={<Companies />} />
           <Route path="/ilanlar" element={<Jobs />} />
-          <Route path="/kayit-ol" element={<Register_personal />} />
-          <Route path="/kayit-ol-company" element={<Register_company />} />
+          <Route path="/kayit-ol" element={<RegisterApplicant />} />
+          <Route path="/kayit-ol-company" element={<RegisterCompany />} />
         </Routes>
         <Footer />
       </div>

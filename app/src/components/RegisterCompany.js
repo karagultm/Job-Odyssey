@@ -1,20 +1,16 @@
 import React from 'react';
-import './Register.css';
+import '../styles/Register.css';
 
-const Register_personal = () => {
+const Register_company = () => {
     return (
         <div className="register">
         <form className="form">
             <p className="title">Register</p>
-            <p className="message">Signup now and get full access to our app.</p>
+            <p className="message">Signup now and recruit employees for your company</p>
             <div className="flex">
                 <label>
                     <input className="input" type="text" placeholder="" required />
-                    <span>Firstname</span>
-                </label>
-                <label>
-                    <input className="input" type="text" placeholder="" required />
-                    <span>Lastname</span>
+                    <span>Company Name</span>
                 </label>
             </div>
             <label>
@@ -36,4 +32,4 @@ const Register_personal = () => {
     );
 };
 
-export default Register_personal;
+export default Register_company;
