@@ -7,7 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import '../styles/CompanyAuth.css';
 
-const ApplicantAuth = () => {
+const ApplicantAuth = ({ refreshNavbar }) => {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -57,6 +57,7 @@ const ApplicantAuth = () => {
       return;
     }
       await signInWithEmailAndPassword(auth, email, password);
+      refreshNavbar(); // Refresh the navbar to update the user type
       toast.success('Logged in successfully!');
       navigate('/');
     } catch (error) {
