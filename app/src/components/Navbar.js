@@ -16,7 +16,7 @@ const Navbar = () => {
                 <Link to="/kayit-ol">
                     <button className="btn blue">Kayıt Ol</button>
                 </Link>
-                <Link to="/kayit-ol-company">
+                <Link to="/sirket-kayit">
                     <button className="btn red">Şirket Kayıt</button>
                 </Link>
                 <select className="language-select">

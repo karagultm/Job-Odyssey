@@ -7,7 +7,7 @@ import Home from './Home';
 import Companies from './Companies';
 import Jobs from './Jobs';
 import Footer from './Footer';
-import RegisterCompany from './RegisterCompany';
+import CompanyAuth from './CompanyAuth';
 
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
           <Route path="/sirketler" element={<Companies />} />
           <Route path="/ilanlar" element={<Jobs />} />
           <Route path="/kayit-ol" element={<RegisterApplicant />} />
-          <Route path="/kayit-ol-company" element={<RegisterCompany />} />
+          <Route path="/sirket-kayit" element={<CompanyAuth />} />
         </Routes>
         <Footer />
       </div>
