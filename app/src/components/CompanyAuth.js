@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
-import { doc, setDoc } from 'firebase/firestore';
+import { doc, setDoc, query, where, collection, getDocs } from 'firebase/firestore';
 import { auth, firestore } from '../firebase/firebase';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -47,6 +47,16 @@ const CompanyAuth = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
+      // Check if the user exists in the companies collection
+    const companyQuery = query(collection(firestore, 'companies'), where('email', '==', email));
+    const companySnapshot = await getDocs(companyQuery);
+
+    if (companySnapshot.empty) {
+      // If the user does not exist in the companies collection, show an error message
+      toast.error('Invalid company email or password');
+      return;
+    }
+
       await signInWithEmailAndPassword(auth, email, password);
       toast.success('Logged in successfully!');
       navigate('/');
