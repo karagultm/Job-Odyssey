@@ -3,6 +3,9 @@ import '../styles/App.css';
 import Navbar from './Navbar';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ApplicantAuth from './ApplicantAuth';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import Home from './Home';
 import Companies from './Companies';
 import Jobs from './Jobs';
@@ -14,6 +17,7 @@ function App() {
     <Router>
       <div className="App">
         <Navbar />
+        <ToastContainer />
         <Routes>
           {/* Ana sayfa bileşeni veya diğer bileşenler buraya eklenebilir */}
           <Route path="/" element={<Home />} />
