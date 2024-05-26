@@ -13,7 +13,7 @@ const Navbar = () => {
                 <li><Link to="/ilanlar">İlanlar</Link></li>
             </ul>
             <div className="navbar-buttons">
-                <Link to="/kayit-ol">
+                <Link to="/aday-kayit">
                     <button className="btn blue">Kayıt Ol</button>
                 </Link>
                 <Link to="/sirket-kayit">

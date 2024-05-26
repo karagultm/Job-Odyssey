@@ -2,7 +2,7 @@ import React from 'react';
 import '../styles/App.css';
 import Navbar from './Navbar';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import RegisterApplicant from './RegisterApplicant';
+import ApplicantAuth from './ApplicantAuth';
 import Home from './Home';
 import Companies from './Companies';
 import Jobs from './Jobs';
@@ -19,7 +19,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/sirketler" element={<Companies />} />
           <Route path="/ilanlar" element={<Jobs />} />
-          <Route path="/kayit-ol" element={<RegisterApplicant />} />
+          <Route path="/aday-kayit" element={<ApplicantAuth />} />
           <Route path="/sirket-kayit" element={<CompanyAuth />} />
         </Routes>
         <Footer />
