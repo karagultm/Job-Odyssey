@@ -275,7 +275,7 @@ const MyProfile = ({ refreshNavbar }) => {
         const newCourses = [...courses];
         newCourses[index].courseName = e.target.value;
         setCourses(newCourses);
-      }} required />
+      }} />
     </label>
     <label>
       Institution
@@ -283,7 +283,7 @@ const MyProfile = ({ refreshNavbar }) => {
         const newCourses = [...courses];
         newCourses[index].institution = e.target.value;
         setCourses(newCourses);
-      }} required />
+      }} />
     </label>
     <label>
       Completion Date
@@ -291,7 +291,7 @@ const MyProfile = ({ refreshNavbar }) => {
         const newCourses = [...courses];
         newCourses[index].completionDate = e.target.value;
         setCourses(newCourses);
-      }} required />
+      }} />
     </label>
   </div>
 ))}
@@ -306,7 +306,7 @@ const MyProfile = ({ refreshNavbar }) => {
         const newCertifications = [...certifications];
         newCertifications[index].certificationName = e.target.value;
         setCertifications(newCertifications);
-      }} required />
+      }} />
     </label>
     <label>
       Institution
@@ -314,7 +314,7 @@ const MyProfile = ({ refreshNavbar }) => {
         const newCertifications = [...certifications];
         newCertifications[index].institution = e.target.value;
         setCertifications(newCertifications);
-      }} required />
+      }} />
     </label>
     <label>
       Issuance Date
@@ -322,7 +322,7 @@ const MyProfile = ({ refreshNavbar }) => {
         const newCertifications = [...certifications];
         newCertifications[index].issuanceDate = e.target.value;
         setCertifications(newCertifications);
-      }} required />
+      }} />
     </label>
   </div>
 ))}

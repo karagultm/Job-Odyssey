@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "../styles/Navbar.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getCurrentUserType, auth } from "../firebase/firebase";
 import { signOut } from "firebase/auth";
 
 const Navbar = () => {
   const [userType, setUserType] = useState(null);
+  const navigate = useNavigate(); // Initialize navigate hook
 
   useEffect(() => {
     const fetchUserType = async () => {
@@ -25,6 +26,7 @@ const Navbar = () => {
       await signOut(auth);
       console.log("User signed out");
       setUserType(null);
+      navigate("/"); // Navigate to home page after logout
     } catch (error) {
       console.error("Failed to sign out:", error);
     }
