@@ -21,6 +21,7 @@ const MyProfile = ({ refreshNavbar }) => {
     gender: '',
     birthLocation: '',
     driversLicense: '',
+    deferralDate: '',
     militaryStatus: '',
     searchingNewOpportunities: false,
     schoolInternshipMatch: false,
@@ -64,6 +65,7 @@ const MyProfile = ({ refreshNavbar }) => {
               gender: userData.personalInfo.gender || '',
               birthLocation: userData.personalInfo.birthLocation || '',
               driversLicense: userData.personalInfo.driversLicense || '',
+              deferralDate: userData.personalInfo.deferralDate || '',
               militaryStatus: userData.personalInfo.militaryStatus || '',
               searchingNewOpportunities: userData.personalInfo.searchingNewOpportunities || false,
               schoolInternshipMatch: userData.personalInfo.schoolInternshipMatch || false,
@@ -213,8 +215,19 @@ const MyProfile = ({ refreshNavbar }) => {
         </label>
         <label>
           Military Status
-          <input type="text" name="militaryStatus" value={personalInfo.militaryStatus} onChange={handleInputChange} required />
+          <select name="militaryStatus" value={personalInfo.militaryStatus} onChange={handleInputChange} required>
+            <option value="">Select</option>
+            <option value="Yapıldı">Yapıldı</option>
+            <option value="Muaf">Muaf</option>
+            <option value="Tecilli">Tecilli</option>
+          </select>
         </label>
+          {personalInfo.militaryStatus === 'Tecilli' && (
+        <label>
+        Deferral Date
+          <input type="date" name="deferralDate" value={personalInfo.deferralDate} onChange={handleInputChange} required />
+          </label>
+        )}
         <label>
           Are you searching for new opportunities?
           <input type="checkbox" name="searchingNewOpportunities" checked={personalInfo.searchingNewOpportunities} onChange={handleInputChange} />
