@@ -5,6 +5,7 @@ import { auth, firestore } from '../firebase/firebase';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import '../styles/MyProfile.css';
+import withAuthCheck from './withAuthCheck'; // Adjust the import path accordingly
 
 const MyProfile = ({ refreshNavbar }) => {
   const [personalInfo, setPersonalInfo] = useState({
@@ -226,138 +227,6 @@ const MyProfile = ({ refreshNavbar }) => {
           </div>
         ))}
 
-        <h3>Volunteer Experience</h3>
-        <button type="button" onClick={() => setVolunteerExperience([...volunteerExperience, { organizationName: '', role: '', startDate: '', endDate: '', description: '' }])}>Add Volunteer Experience</button>
-        {volunteerExperience.map((vol, index) => (
-          <div key={index}>
-            <label>
-              Organization Name
-              <input type="text" value={vol.organizationName} onChange={(e) => {
-                const newVolunteerExperience = [...volunteerExperience];
-                newVolunteerExperience[index].organizationName = e.target.value;
-                setVolunteerExperience(newVolunteerExperience);
-              }} required />
-            </label>
-            <label>
-              Role
-              <input type="text" value={vol.role} onChange={(e) => {
-                const newVolunteerExperience = [...volunteerExperience];
-                newVolunteerExperience[index].role = e.target.value;
-                setVolunteerExperience(newVolunteerExperience);
-              }} required />
-            </label>
-            <label>
-              Start Date
-              <input type="date" value={vol.startDate} onChange={(e) => {
-                const newVolunteerExperience = [...volunteerExperience];
-                newVolunteerExperience[index].startDate = e.target.value;
-                setVolunteerExperience(newVolunteerExperience);
-              }} required />
-            </label>
-            <label>
-              End Date
-              <input type="date" value={vol.endDate} onChange={(e) => {
-                const newVolunteerExperience = [...volunteerExperience];
-                newVolunteerExperience[index].endDate = e.target.value;
-                setVolunteerExperience(newVolunteerExperience);
-              }} required />
-            </label>
-            <label>
-              Description
-              <textarea value={vol.description} onChange={(e) => {
-                const newVolunteerExperience = [...volunteerExperience];
-                newVolunteerExperience[index].description = e.target.value;
-                setVolunteerExperience(newVolunteerExperience);
-              }} required />
-            </label>
-          </div>
-        ))}
-
-        <h3>Foreign Language Skills</h3>
-        <button type="button" onClick={() => setLanguages([...languages, { language: '', proficiency: '', learnedWhere: '' }])}>Add Language</button>
-        {languages.map((lang, index) => (
-          <div key={index}>
-            <label>
-              Language
-              <input type="text" value={lang.language} onChange={(e) => {
-                const newLanguages = [...languages];
-                newLanguages[index].language = e.target.value;
-                setLanguages(newLanguages);
-              }} required />
-            </label>
-            <label>
-              Proficiency Level
-              <input type="text" value={lang.proficiency} onChange={(e) => {
-                const newLanguages = [...languages];
-                newLanguages[index].proficiency = e.target.value;
-                setLanguages(newLanguages);
-              }} required />
-            </label>
-            <label>
-              Where Learned
-              <input type="text" value={lang.learnedWhere} onChange={(e) => {
-                const newLanguages = [...languages];
-                newLanguages[index].learnedWhere = e.target.value;
-                setLanguages(newLanguages);
-              }} required />
-            </label>
-          </div>
-        ))}
-
-        <h3>Course Information</h3>
-        <button type="button" onClick={() => setCourses([...courses, { courseName: '', timePeriod: '', description: '' }])}>Add Course</button>
-        {courses.map((course, index) => (
-          <div key={index}>
-            <label>
-              Course Name
-              <input type="text" value={course.courseName} onChange={(e) => {
-                const newCourses = [...courses];
-                newCourses[index].courseName = e.target.value;
-                setCourses(newCourses);
-              }} required />
-            </label>
-            <label>
-              Time Period
-              <input type="text" value={course.timePeriod} onChange={(e) => {
-                const newCourses = [...courses];
-                newCourses[index].timePeriod = e.target.value;
-                setCourses(newCourses);
-              }} required />
-            </label>
-            <label>
-              Description
-              <textarea value={course.description} onChange={(e) => {
-                const newCourses = [...courses];
-                newCourses[index].description = e.target.value;
-                setCourses(newCourses);
-              }} required />
-            </label>
-          </div>
-        ))}
-
-        <h3>Certification Information</h3>
-        <button type="button" onClick={() => setCertifications([...certifications, { certificationName: '', date: '' }])}>Add Certification</button>
-        {certifications.map((cert, index) => (
-          <div key={index}>
-            <label>
-              Certification Name
-              <input type="text" value={cert.certificationName} onChange={(e) => {
-                const newCertifications = [...certifications];
-                newCertifications[index].certificationName = e.target.value;
-                setCertifications(newCertifications);
-              }} required />
-            </label>
-            <label>
-              Date
-              <input type="date" value={cert.date} onChange={(e) => {
-                const newCertifications = [...certifications];
-                newCertifications[index].date = e.target.value;
-                setCertifications(newCertifications);
-              }} required />
-            </label>
-          </div>
-        ))}
-
         <button type="submit">Save Profile</button>
       </form>
       <ToastContainer />
@@ -365,4 +234,4 @@ const MyProfile = ({ refreshNavbar }) => {
   );
 };
 
-export default MyProfile;
+export default withAuthCheck(MyProfile); // Wrap the component with the HOC

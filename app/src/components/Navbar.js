@@ -11,7 +11,6 @@ const Navbar = () => {
     const fetchUserType = async () => {
       try {
         const type = await getCurrentUserType();
-        console.log("Fetched user type:", type);
         setUserType(type);
       } catch (error) {
         console.error("Failed to fetch user type:", error);
@@ -43,12 +42,16 @@ const Navbar = () => {
         <li>
           <Link to="/ilanlar">İlanlar</Link>
         </li>
-        <li>
-          <Link to="/is-paylas">İş Paylaş</Link>
-        </li>
-        <li>
-          <Link to="/my-profile">Profilim</Link>
-        </li>
+        {userType === "company" && (
+          <li>
+            <Link to="/is-paylas">İş Paylaş</Link>
+          </li>
+        )}
+        {userType && (
+          <li>
+            <Link to="/my-profile">Profilim</Link>
+          </li>
+        )}
       </ul>
       <div className="navbar-buttons">
         {userType === "company" ? (
