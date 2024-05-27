@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { collection, addDoc } from 'firebase/firestore';
-import { firestore } from '../firebase/firebase'; // Güncellenmiş import yolu
-import '../styles/CreateJob.css'; // CSS dosyasını import edelim
+import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
+import { firestore, storage } from '../firebase/firebase';
+import '../styles/CreateJob.css';
 
 const CreateJob = () => {
     const [jobData, setJobData] = useState({
@@ -17,7 +18,9 @@ const CreateJob = () => {
     });
 
     const [qualificationInput, setQualificationInput] = useState('');
-    const navigate = useNavigate(); // useNavigate kancasını kullanarak navigasyonu sağlayalım
+    const [file, setFile] = useState(null);
+    const [fileError, setFileError] = useState(false);
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         setJobData({ ...jobData, [e.target.name]: e.target.value });
@@ -31,31 +34,68 @@ const CreateJob = () => {
         setQualificationInput('');
     };
 
+    const handleFileChange = (e) => {
+        setFile(e.target.files[0]);
+        setFileError(false);
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         // Tüm alanların doldurulup doldurulmadığını kontrol edelim
         for (const key in jobData) {
-            if (jobData[key] === '' || (Array.isArray(jobData[key]) && jobData[key].length === 0)) {
+            if (key === 'jobPicture') {
+                continue;
+            } else if (jobData[key] === '' || (Array.isArray(jobData[key]) && jobData[key].length === 0)) {
                 alert('Please fill in all fields');
                 return;
             }
         }
 
+        if (!file) {
+            setFileError(true);
+            alert('Please upload a job picture');
+            return;
+        }
+
         try {
-            await addDoc(collection(firestore, 'jobs'), jobData);
-            alert('Job posted successfully!');
-            navigate('/'); // İşlem başarılı olursa ana sayfaya yönlendirelim
+            const storageRef = ref(storage, `jobs/${file.name}`);
+            const uploadTask = uploadBytesResumable(storageRef, file);
+
+            uploadTask.on('state_changed',
+                (snapshot) => {
+                    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    console.log('Upload is ' + progress + '% done');
+                },
+                (error) => {
+                    console.error('Error uploading file:', error);
+                },
+                async () => {
+                    const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+                    console.log('File available at', downloadURL);
+                    await addJob(downloadURL);
+                }
+            );
         } catch (e) {
             console.error('Error adding document: ', e);
+        }
+    };
+
+    const addJob = async (pictureUrl) => {
+        try {
+            await addDoc(collection(firestore, 'jobs'), { ...jobData, jobPicture: pictureUrl });
+            alert('Job posted successfully!');
+            navigate('/');
+        } catch (e) {
+            console.error('Error adding job: ', e);
         }
     };
 
     const getCurrentDate = () => {
         const today = new Date();
         const year = today.getFullYear();
-        const month = String(today.getMonth() + 1).padStart(2, '0'); // Ayı iki haneli hale getirir
-        const day = String(today.getDate()).padStart(2, '0'); // Günü iki haneli hale getirir
+        const month = String(today.getMonth() + 1).padStart(2, '0');
+        const day = String(today.getDate()).padStart(2, '0');
         return `${year}-${month}-${day}`;
     };
 
@@ -63,8 +103,8 @@ const CreateJob = () => {
         const today = new Date();
         today.setMonth(today.getMonth() + 6);
         const year = today.getFullYear();
-        const month = String(today.getMonth() + 1).padStart(2, '0'); // Ayı iki haneli hale getirir
-        const day = String(today.getDate()).padStart(2, '0'); // Günü iki haneli hale getirir
+        const month = String(today.getMonth() + 1).padStart(2, '0');
+        const day = String(today.getDate()).padStart(2, '0');
         return `${year}-${month}-${day}`;
     };
 
@@ -114,20 +154,20 @@ const CreateJob = () => {
                 <input
                     type="date"
                     name="applicationDeadline"
-                    min={getCurrentDate()} // Tarih seçeneği için minimum değeri ayarlıyoruz
-                    max={getMaxDate()} // Tarih seçeneği için maksimum değeri ayarlıyoruz
+                    min={getCurrentDate()}
+                    max={getMaxDate()}
                     value={jobData.applicationDeadline}
                     onChange={handleChange}
                     required
                 />
                 <input
-                    type="text"
+                    type="file"
                     name="jobPicture"
-                    placeholder="Job Picture URL"
-                    value={jobData.jobPicture}
-                    onChange={handleChange}
+                    accept="image/*"
+                    onChange={handleFileChange}
                     required
                 />
+                {fileError && <p style={{ color: 'red' }}>Please upload a job picture</p>}
                 <div>
                     <input
                         type="text"
