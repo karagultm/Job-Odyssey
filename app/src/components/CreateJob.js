@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { collection, addDoc } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
-import { firestore, storage } from '../firebase/firebase';
+import { firestore, storage, auth } from '../firebase/firebase';
 import '../styles/CreateJob.css';
 
 const CreateJob = () => {
@@ -12,10 +12,25 @@ const CreateJob = () => {
         jobType: '',
         location: '',
         department: '',
+        applicationReleaseDate: '', // Bu veriyi state'te tutmaya gerek yok
         applicationDeadline: '',
         jobPicture: '',
         qualifications: [],
+        companyID: '', // companyID state'i eklenmiş
     });
+
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+            if (user) {
+                setJobData((prevJobData) => ({ ...prevJobData, companyID: user.uid }));
+            } else {
+                // Kullanıcı oturum açmamışsa veya çıkış yapmışsa burada gerekli işlemler yapılabilir.
+            }
+        });
+
+        // useEffect içinde abonelik oluşturduğumuz için bu aboneliği temizlemeliyiz.
+        return () => unsubscribe();
+    }, []);
 
     const [qualificationInput, setQualificationInput] = useState('');
     const [file, setFile] = useState(null);
@@ -44,7 +59,7 @@ const CreateJob = () => {
 
         // Tüm alanların doldurulup doldurulmadığını kontrol edelim
         for (const key in jobData) {
-            if (key === 'jobPicture') {
+            if (key === 'jobPicture' || key === 'applicationReleaseDate' || key === 'companyID') {
                 continue;
             } else if (jobData[key] === '' || (Array.isArray(jobData[key]) && jobData[key].length === 0)) {
                 alert('Please fill in all fields');
@@ -59,7 +74,7 @@ const CreateJob = () => {
         }
 
         try {
-            const storageRef = ref(storage, `jobs/${file.name}`);
+            const storageRef = ref(storage, `jobsPictures/${file.name}`);
             const uploadTask = uploadBytesResumable(storageRef, file);
 
             uploadTask.on('state_changed',
@@ -72,7 +87,6 @@ const CreateJob = () => {
                 },
                 async () => {
                     const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-                    console.log('File available at', downloadURL);
                     await addJob(downloadURL);
                 }
             );
