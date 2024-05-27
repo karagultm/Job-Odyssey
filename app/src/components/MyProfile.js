@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { doc, updateDoc } from 'firebase/firestore';
+import { doc, updateDoc, getDoc } from 'firebase/firestore';
 import { auth, firestore } from '../firebase/firebase';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -25,6 +25,8 @@ const MyProfile = ({ refreshNavbar }) => {
     militaryStatus: '',
     searchingNewOpportunities: false,
     schoolInternshipMatch: false,
+    address: '', // Ensure address is included in personalInfo state
+    email: '' // Ensure email is included in personalInfo state
   });
 
   const [education, setEducation] = useState([]);
@@ -35,6 +37,39 @@ const MyProfile = ({ refreshNavbar }) => {
   const [certifications, setCertifications] = useState([]);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const user = auth.currentUser;
+      if (user) {
+        try {
+          const docRef = doc(firestore, 'applicants', user.uid);
+          const docSnap = await getDoc(docRef);
+          if (docSnap.exists()) {
+            const userData = docSnap.data();
+            setPersonalInfo((prevInfo) => ({
+              ...prevInfo,
+              name: userData.fullName || '',
+              location: userData.address || '',
+              email: userData.email || '',
+              title: userData.title || ''
+            }));
+            setEducation(userData.education || []);
+            setWorkExperience(userData.workExperience || []);
+            setVolunteerExperience(userData.volunteerExperience || []);
+            setLanguages(userData.languages || []);
+            setCourses(userData.courses || []);
+            setCertifications(userData.certifications || []);
+          }
+        } catch (error) {
+          console.error('Error fetching user data: ', error);
+          toast.error(error.message);
+        }
+      }
+    };
+
+    fetchUserData();
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -71,6 +106,12 @@ const MyProfile = ({ refreshNavbar }) => {
     }
   };
 
+  const handleRemoveItem = (list, setList, index) => {
+    const newList = [...list];
+    newList.splice(index, 1);
+    setList(newList);
+  };
+
   return (
     <div className="my-profile">
       <h2>My Profile</h2>
@@ -81,9 +122,13 @@ const MyProfile = ({ refreshNavbar }) => {
           <input type="text" name="name" value={personalInfo.name} onChange={handleInputChange} required />
         </label>
         <label>
-          Surname
-          <input type="text" name="surname" value={personalInfo.surname} onChange={handleInputChange} required />
-        </label>
+        Email
+        <input type="email" name="email" value={personalInfo.email} onChange={handleInputChange} required />
+      </label>
+      <label>
+        Title
+        <input type="text" name="title" value={personalInfo.title} onChange={handleInputChange} required />
+      </label>
         <label>
           Location
           <input type="text" name="location" value={personalInfo.location} onChange={handleInputChange} required />
@@ -177,6 +222,7 @@ const MyProfile = ({ refreshNavbar }) => {
                 setEducation(newEducation);
               }} required />
             </label>
+            <button type="button" onClick={() => handleRemoveItem(education, setEducation, index)}>Remove</button>
           </div>
         ))}
 
@@ -224,6 +270,7 @@ const MyProfile = ({ refreshNavbar }) => {
                 setWorkExperience(newWorkExperience);
               }} required />
             </label>
+            <button type="button" onClick={() => handleRemoveItem(workExperience, setWorkExperience, index)}>Remove</button>
           </div>
         ))}
 
@@ -239,93 +286,129 @@ const MyProfile = ({ refreshNavbar }) => {
                 setVolunteerExperience(newVolunteerExperience);
               }} required />
             </label>
-            {/* Similarly, add inputs for other fields like role, startDate, endDate, description */}
+            <label>
+              Role
+              <input type="text" value={volunteer.role} onChange={(e) => {
+                const newVolunteerExperience = [...volunteerExperience];
+                newVolunteerExperience[index].role = e.target.value;
+                setVolunteerExperience(newVolunteerExperience);
+              }} required />
+            </label>
+            <label>
+              Start Date
+              <input type="date" value={volunteer.startDate} onChange={(e) => {
+                const newVolunteerExperience = [...volunteerExperience];
+                newVolunteerExperience[index].startDate = e.target.value;
+                setVolunteerExperience(newVolunteerExperience);
+              }} required />
+            </label>
+            <label>
+              End Date
+              <input type="date" value={volunteer.endDate} onChange={(e) => {
+                const newVolunteerExperience = [...volunteerExperience];
+                newVolunteerExperience[index].endDate = e.target.value;
+                setVolunteerExperience(newVolunteerExperience);
+              }} required />
+            </label>
+            <label>
+              Description
+              <textarea value={volunteer.description} onChange={(e) => {
+                const newVolunteerExperience = [...volunteerExperience];
+                newVolunteerExperience[index].description = e.target.value;
+                setVolunteerExperience(newVolunteerExperience);
+              }} required />
+            </label>
+            <button type="button" onClick={() => handleRemoveItem(volunteerExperience, setVolunteerExperience, index)}>Remove</button>
           </div>
         ))}
+
         <h3>Languages</h3>
-<button type="button" onClick={() => setLanguages([...languages, { language: '', proficiency: '' }])}>Add Language</button>
-{languages.map((lang, index) => (
-  <div key={index}>
-    <label>
-      Language
-      <input type="text" value={lang.language} onChange={(e) => {
-        const newLanguages = [...languages];
-        newLanguages[index].language = e.target.value;
-        setLanguages(newLanguages);
-      }} required />
-    </label>
-    <label>
-      Proficiency
-      <input type="text" value={lang.proficiency} onChange={(e) => {
-        const newLanguages = [...languages];
-        newLanguages[index].proficiency = e.target.value;
-        setLanguages(newLanguages);
-      }} required />
-    </label>
-  </div>
-))}
+        <button type="button" onClick={() => setLanguages([...languages, { language: '', proficiency: '' }])}>Add Language</button>
+        {languages.map((lang, index) => (
+          <div key={index}>
+            <label>
+              Language
+              <input type="text" value={lang.language} onChange={(e) => {
+                const newLanguages = [...languages];
+                newLanguages[index].language = e.target.value;
+                setLanguages(newLanguages);
+              }} required />
+            </label>
+            <label>
+              Proficiency
+              <input type="text" value={lang.proficiency} onChange={(e) => {
+                const newLanguages = [...languages];
+                newLanguages[index].proficiency = e.target.value;
+                setLanguages(newLanguages);
+              }} required />
+            </label>
+            <button type="button" onClick={() => handleRemoveItem(languages, setLanguages, index)}>Remove</button>
+          </div>
+        ))}
 
-<h3>Courses</h3>
-<button type="button" onClick={() => setCourses([...courses, { courseName: '', institution: '', completionDate: '' }])}>Add Course</button>
-{courses.map((course, index) => (
-  <div key={index}>
-    <label>
-      Course Name
-      <input type="text" value={course.courseName} onChange={(e) => {
-        const newCourses = [...courses];
-        newCourses[index].courseName = e.target.value;
-        setCourses(newCourses);
-      }} />
-    </label>
-    <label>
-      Institution
-      <input type="text" value={course.institution} onChange={(e) => {
-        const newCourses = [...courses];
-        newCourses[index].institution = e.target.value;
-        setCourses(newCourses);
-      }} />
-    </label>
-    <label>
-      Completion Date
-      <input type="date" value={course.completionDate} onChange={(e) => {
-        const newCourses = [...courses];
-        newCourses[index].completionDate = e.target.value;
-        setCourses(newCourses);
-      }} />
-    </label>
-  </div>
-))}
+        <h3>Courses</h3>
+        <button type="button" onClick={() => setCourses([...courses, { courseName: '', institution: '', completionDate: '' }])}>Add Course</button>
+        {courses.map((course, index) => (
+          <div key={index}>
+            <label>
+              Course Name
+              <input type="text" value={course.courseName} onChange={(e) => {
+                const newCourses = [...courses];
+                newCourses[index].courseName = e.target.value;
+                setCourses(newCourses);
+              }} />
+            </label>
+            <label>
+              Institution
+              <input type="text" value={course.institution} onChange={(e) => {
+                const newCourses = [...courses];
+                newCourses[index].institution = e.target.value;
+                setCourses(newCourses);
+              }} />
+            </label>
+            <label>
+              Completion Date
+              <input type="date" value={course.completionDate} onChange={(e) => {
+                const newCourses = [...courses];
+                newCourses[index].completionDate = e.target.value;
+                setCourses(newCourses);
+              }} />
+            </label>
+            <button type="button" onClick={() => handleRemoveItem(courses, setCourses, index)}>Remove</button>
+          </div>
+        ))}
 
-<h3>Certifications</h3>
-<button type="button" onClick={() => setCertifications([...certifications, { certificationName: '', institution: '', issuanceDate: '' }])}>Add Certification</button>
-{certifications.map((certification, index) => (
-  <div key={index}>
-    <label>
-      Certification Name
-      <input type="text" value={certification.certificationName} onChange={(e) => {
-        const newCertifications = [...certifications];
-        newCertifications[index].certificationName = e.target.value;
-        setCertifications(newCertifications);
-      }} />
-    </label>
-    <label>
-      Institution
-      <input type="text" value={certification.institution} onChange={(e) => {
-        const newCertifications = [...certifications];
-        newCertifications[index].institution = e.target.value;
-        setCertifications(newCertifications);
-      }} />
-    </label>
-    <label>
-      Issuance Date
-      <input type="date" value={certification.issuanceDate} onChange={(e) => {
-        const newCertifications = [...certifications];
-        newCertifications[index].issuanceDate = e.target.value;
-        setCertifications(newCertifications);
-      }} />
-    </label>
-  </div>
-))}
+        <h3>Certifications</h3>
+        <button type="button" onClick={() => setCertifications([...certifications, { certificationName: '', institution: '', issuanceDate: '' }])}>Add Certification</button>
+        {certifications.map((certification, index) => (
+          <div key={index}>
+            <label>
+              Certification Name
+              <input type="text" value={certification.certificationName} onChange={(e) => {
+                const newCertifications = [...certifications];
+                newCertifications[index].certificationName = e.target.value;
+                setCertifications(newCertifications);
+              }} />
+            </label>
+            <label>
+              Institution
+              <input type="text" value={certification.institution} onChange={(e) => {
+                const newCertifications = [...certifications];
+                newCertifications[index].institution = e.target.value;
+                setCertifications(newCertifications);
+              }} />
+            </label>
+            <label>
+              Issuance Date
+              <input type="date" value={certification.issuanceDate} onChange={(e) => {
+                const newCertifications = [...certifications];
+                newCertifications[index].issuanceDate = e.target.value;
+                setCertifications(newCertifications);
+              }} />
+            </label>
+            <button type="button" onClick={() => handleRemoveItem(certifications, setCertifications, index)}>Remove</button>
+          </div>
+        ))}
 
         <button type="submit">Save Profile</button>
       </form>
