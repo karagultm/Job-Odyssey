@@ -94,6 +94,12 @@
   .dynamic-section label textarea {
     margin-top: 3px;
   }
+
+  select {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
+  }
   
   @media (max-width: 600px) {
     .my-profile {
