@@ -12,6 +12,7 @@ import Jobs from "./Jobs";
 import Footer from "./Footer";
 import CompanyAuth from "./CompanyAuth";
 import CreateJob from "./CreateJob";
+import MyProfile from "./MyProfile"
 
 function App() {
   const [refreshKey, setRefreshKey] = useState(0); // Add key state
@@ -33,6 +34,7 @@ function App() {
           <Route path="/aday-kayit" element={<ApplicantAuth refreshNavbar={refreshNavbar}/>} />
           <Route path="/sirket-kayit" element={<CompanyAuth refreshNavbar={refreshNavbar} />} />
           <Route path="/is-paylas" element={<CreateJob />} />
+          <Route path="/my-profile" element={<MyProfile />} />
         </Routes>
         <Footer />
       </div>
