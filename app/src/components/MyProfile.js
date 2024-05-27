@@ -35,6 +35,9 @@ const MyProfile = ({ refreshNavbar }) => {
   const [languages, setLanguages] = useState([]);
   const [courses, setCourses] = useState([]);
   const [certifications, setCertifications] = useState([]);
+  const [phoneNumberError, setPhoneNumberError] = useState('');
+  const [salaryExpectationError, setSalaryExpectationError] = useState('');
+
 
   const navigate = useNavigate();
 
@@ -87,6 +90,20 @@ const MyProfile = ({ refreshNavbar }) => {
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
+    if (name === 'phoneNumber') {
+      if (!/^\d+$/.test(value)) {
+        setPhoneNumberError('Enter only digits');
+      } else {
+        setPhoneNumberError('');
+      }
+    }
+    if (name === 'salaryExpectation') {
+      if (!/^\d+$/.test(value)) {
+        setSalaryExpectationError('Enter only digits');
+      } else {
+        setSalaryExpectationError('');
+      }
+    }
     if (type === 'checkbox') {
       setPersonalInfo({ ...personalInfo, [name]: checked });
     } else {
@@ -161,10 +178,12 @@ const MyProfile = ({ refreshNavbar }) => {
           Salary Expectation
           <input type="number" name="salaryExpectation" value={personalInfo.salaryExpectation} onChange={handleInputChange} required />
         </label>
+        {salaryExpectationError && <p className="error">{salaryExpectationError}</p>}
         <label>
           Phone Number
-          <input type="tel" name="phoneNumber" value={personalInfo.phoneNumber} onChange={handleInputChange} required />
+          <input type="tel" name="phoneNumber" value={personalInfo.phoneNumber} onChange={handleInputChange} pattern="[0-9]{10}" required />
         </label>
+        {phoneNumberError && <p className="error">{phoneNumberError}</p>}
         <label>
           National ID
           <input type="text" name="nationalId" value={personalInfo.nationalId} onChange={handleInputChange} required />
@@ -179,7 +198,10 @@ const MyProfile = ({ refreshNavbar }) => {
         </label>
         <label>
           Gender
-          <input type="text" name="gender" value={personalInfo.gender} onChange={handleInputChange} required />
+        <select name="gender" value={personalInfo.gender} onChange={handleInputChange} required>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
         </label>
         <label>
           Birth Location
