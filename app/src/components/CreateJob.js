@@ -33,13 +33,39 @@ const CreateJob = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        // Tüm alanların doldurulup doldurulmadığını kontrol edelim
+        for (const key in jobData) {
+            if (jobData[key] === '' || (Array.isArray(jobData[key]) && jobData[key].length === 0)) {
+                alert('Please fill in all fields');
+                return;
+            }
+        }
+
         try {
-            await addDoc(collection(firestore, 'jobListings'), jobData);
+            await addDoc(collection(firestore, 'jobs'), jobData);
             alert('Job posted successfully!');
             navigate('/'); // İşlem başarılı olursa ana sayfaya yönlendirelim
         } catch (e) {
             console.error('Error adding document: ', e);
         }
+    };
+
+    const getCurrentDate = () => {
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = String(today.getMonth() + 1).padStart(2, '0'); // Ayı iki haneli hale getirir
+        const day = String(today.getDate()).padStart(2, '0'); // Günü iki haneli hale getirir
+        return `${year}-${month}-${day}`;
+    };
+
+    const getMaxDate = () => {
+        const today = new Date();
+        today.setMonth(today.getMonth() + 6);
+        const year = today.getFullYear();
+        const month = String(today.getMonth() + 1).padStart(2, '0'); // Ayı iki haneli hale getirir
+        const day = String(today.getDate()).padStart(2, '0'); // Günü iki haneli hale getirir
+        return `${year}-${month}-${day}`;
     };
 
     return (
@@ -52,12 +78,14 @@ const CreateJob = () => {
                     placeholder="Job Name"
                     value={jobData.jobName}
                     onChange={handleChange}
+                    required
                 />
                 <textarea
                     name="jobDescription"
                     placeholder="Job Description"
                     value={jobData.jobDescription}
                     onChange={handleChange}
+                    required
                 />
                 <input
                     type="text"
@@ -65,6 +93,7 @@ const CreateJob = () => {
                     placeholder="Job Type"
                     value={jobData.jobType}
                     onChange={handleChange}
+                    required
                 />
                 <input
                     type="text"
@@ -72,6 +101,7 @@ const CreateJob = () => {
                     placeholder="Location"
                     value={jobData.location}
                     onChange={handleChange}
+                    required
                 />
                 <input
                     type="text"
@@ -79,12 +109,16 @@ const CreateJob = () => {
                     placeholder="Department"
                     value={jobData.department}
                     onChange={handleChange}
+                    required
                 />
                 <input
                     type="date"
                     name="applicationDeadline"
+                    min={getCurrentDate()} // Tarih seçeneği için minimum değeri ayarlıyoruz
+                    max={getMaxDate()} // Tarih seçeneği için maksimum değeri ayarlıyoruz
                     value={jobData.applicationDeadline}
                     onChange={handleChange}
+                    required
                 />
                 <input
                     type="text"
@@ -92,6 +126,7 @@ const CreateJob = () => {
                     placeholder="Job Picture URL"
                     value={jobData.jobPicture}
                     onChange={handleChange}
+                    required
                 />
                 <div>
                     <input
