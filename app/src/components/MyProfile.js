@@ -10,7 +10,6 @@ import withAuthCheck from './withAuthCheck'; // Adjust the import path according
 const MyProfile = ({ refreshNavbar }) => {
   const [personalInfo, setPersonalInfo] = useState({
     name: '',
-    surname: '',
     location: '',
     aboutMe: '',
     skills: '',
@@ -25,8 +24,9 @@ const MyProfile = ({ refreshNavbar }) => {
     militaryStatus: '',
     searchingNewOpportunities: false,
     schoolInternshipMatch: false,
-    address: '', // Ensure address is included in personalInfo state
-    email: '' // Ensure email is included in personalInfo state
+    address: '',
+    email: '',
+    title: ''
   });
 
   const [education, setEducation] = useState([]);
@@ -50,7 +50,21 @@ const MyProfile = ({ refreshNavbar }) => {
             setPersonalInfo((prevInfo) => ({
               ...prevInfo,
               name: userData.fullName || '',
-              location: userData.address || '',
+              location: userData.personalInfo.location || '',
+              aboutMe: userData.personalInfo.aboutMe || '',
+              skills: userData.personalInfo.skills || '',
+              salaryExpectation: userData.personalInfo.salaryExpectation || '',
+              phoneNumber: userData.personalInfo.phoneNumber || '',
+              nationalId: userData.personalInfo.nationalId || '',
+              nationality: userData.personalInfo.nationality || '',
+              birthDate: userData.personalInfo.birthDate || '',
+              gender: userData.personalInfo.gender || '',
+              birthLocation: userData.personalInfo.birthLocation || '',
+              driversLicense: userData.personalInfo.driversLicense || '',
+              militaryStatus: userData.personalInfo.militaryStatus || '',
+              searchingNewOpportunities: userData.personalInfo.searchingNewOpportunities || false,
+              schoolInternshipMatch: userData.personalInfo.schoolInternshipMatch || false,
+              address: userData.address || '',
               email: userData.email || '',
               title: userData.title || ''
             }));
@@ -104,14 +118,12 @@ const MyProfile = ({ refreshNavbar }) => {
     } else {
       toast.error('No user is logged in');
     }
-  };
-
+  }
   const handleRemoveItem = (list, setList, index) => {
     const newList = [...list];
     newList.splice(index, 1);
     setList(newList);
   };
-
   return (
     <div className="my-profile">
       <h2>My Profile</h2>
@@ -124,6 +136,10 @@ const MyProfile = ({ refreshNavbar }) => {
         <label>
         Email
         <input type="email" name="email" value={personalInfo.email} onChange={handleInputChange} required />
+      </label>
+      <label>
+        Address
+        <input type="address" name="address" value={personalInfo.email} onChange={handleInputChange} required />
       </label>
       <label>
         Title
