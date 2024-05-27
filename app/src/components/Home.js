@@ -2,7 +2,7 @@ import React from 'react';
 import '../styles/Home.css';
 import Searchbar from './Searchbar';
 import Cards from './Cards';
-import CreateJob from './CreateJob';
+
 const Home = () => {
     return (
         <div className="home">

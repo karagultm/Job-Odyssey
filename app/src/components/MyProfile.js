@@ -227,6 +227,106 @@ const MyProfile = ({ refreshNavbar }) => {
           </div>
         ))}
 
+        <h3>Volunteer Experience</h3>
+        <button type="button" onClick={() => setVolunteerExperience([...volunteerExperience, { organization: '', role: '', startDate: '', endDate: '', description: '' }])}>Add Volunteer Experience</button>
+        {volunteerExperience.map((volunteer, index) => (
+          <div key={index}>
+            <label>
+              Organization
+              <input type="text" value={volunteer.organization} onChange={(e) => {
+                const newVolunteerExperience = [...volunteerExperience];
+                newVolunteerExperience[index].organization = e.target.value;
+                setVolunteerExperience(newVolunteerExperience);
+              }} required />
+            </label>
+            {/* Similarly, add inputs for other fields like role, startDate, endDate, description */}
+          </div>
+        ))}
+        <h3>Languages</h3>
+<button type="button" onClick={() => setLanguages([...languages, { language: '', proficiency: '' }])}>Add Language</button>
+{languages.map((lang, index) => (
+  <div key={index}>
+    <label>
+      Language
+      <input type="text" value={lang.language} onChange={(e) => {
+        const newLanguages = [...languages];
+        newLanguages[index].language = e.target.value;
+        setLanguages(newLanguages);
+      }} required />
+    </label>
+    <label>
+      Proficiency
+      <input type="text" value={lang.proficiency} onChange={(e) => {
+        const newLanguages = [...languages];
+        newLanguages[index].proficiency = e.target.value;
+        setLanguages(newLanguages);
+      }} required />
+    </label>
+  </div>
+))}
+
+<h3>Courses</h3>
+<button type="button" onClick={() => setCourses([...courses, { courseName: '', institution: '', completionDate: '' }])}>Add Course</button>
+{courses.map((course, index) => (
+  <div key={index}>
+    <label>
+      Course Name
+      <input type="text" value={course.courseName} onChange={(e) => {
+        const newCourses = [...courses];
+        newCourses[index].courseName = e.target.value;
+        setCourses(newCourses);
+      }} required />
+    </label>
+    <label>
+      Institution
+      <input type="text" value={course.institution} onChange={(e) => {
+        const newCourses = [...courses];
+        newCourses[index].institution = e.target.value;
+        setCourses(newCourses);
+      }} required />
+    </label>
+    <label>
+      Completion Date
+      <input type="date" value={course.completionDate} onChange={(e) => {
+        const newCourses = [...courses];
+        newCourses[index].completionDate = e.target.value;
+        setCourses(newCourses);
+      }} required />
+    </label>
+  </div>
+))}
+
+<h3>Certifications</h3>
+<button type="button" onClick={() => setCertifications([...certifications, { certificationName: '', institution: '', issuanceDate: '' }])}>Add Certification</button>
+{certifications.map((certification, index) => (
+  <div key={index}>
+    <label>
+      Certification Name
+      <input type="text" value={certification.certificationName} onChange={(e) => {
+        const newCertifications = [...certifications];
+        newCertifications[index].certificationName = e.target.value;
+        setCertifications(newCertifications);
+      }} required />
+    </label>
+    <label>
+      Institution
+      <input type="text" value={certification.institution} onChange={(e) => {
+        const newCertifications = [...certifications];
+        newCertifications[index].institution = e.target.value;
+        setCertifications(newCertifications);
+      }} required />
+    </label>
+    <label>
+      Issuance Date
+      <input type="date" value={certification.issuanceDate} onChange={(e) => {
+        const newCertifications = [...certifications];
+        newCertifications[index].issuanceDate = e.target.value;
+        setCertifications(newCertifications);
+      }} required />
+    </label>
+  </div>
+))}
+
         <button type="submit">Save Profile</button>
       </form>
       <ToastContainer />
