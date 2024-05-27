@@ -43,6 +43,9 @@ const Navbar = () => {
         <li>
           <Link to="/ilanlar">İlanlar</Link>
         </li>
+        <li>
+          <Link to="/is-paylas">İş Paylaş</Link>
+        </li>
       </ul>
       <div className="navbar-buttons">
         {userType === "company" ? (

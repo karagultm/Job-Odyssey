@@ -2,7 +2,7 @@ import React from 'react';
 import '../styles/Home.css';
 import Searchbar from './Searchbar';
 import Cards from './Cards';
-
+import CreateJob from './CreateJob';
 const Home = () => {
     return (
         <div className="home">
@@ -19,6 +19,7 @@ const Home = () => {
             <div className="all-jobs-section">
                 <h2>Tüm İlanlar</h2>
                 <div className="cards-container">
+                    {/* <CreateJob /> */}
                     <Cards />
                     <Cards />
                     <Cards />
