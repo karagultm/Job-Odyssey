@@ -4,29 +4,81 @@ import { collection, addDoc } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { firestore, storage, auth } from '../firebase/firebase';
 import '../styles/CreateJob.css';
+import Select from 'react-select';
 
 const getCurrentDate = () => {
     const today = new Date();
     const year = today.getFullYear();
     const month = String(today.getMonth() + 1).padStart(2, '0');
     const day = String(today.getDate()).padStart(2, '0');
-    return `${day}/${month}/${year}`;
+    return `${year}-${month}-${day}`;
 };
 
+const skillsOptions = [
+    { value: 'Java', label: 'Java' },
+    { value: 'Python', label: 'Python' },
+    { value: 'JavaScript', label: 'JavaScript' },
+    { value: 'HTML', label: 'HTML' },
+    { value: 'CSS', label: 'CSS' },
+    { value: 'React', label: 'React' },
+    { value: 'Node.js', label: 'Node.js' },
+    { value: 'C++', label: 'C++' },
+    { value: 'C#', label: 'C#' },
+    { value: 'Go', label: 'Go' },
+    { value: 'Swift', label: 'Swift' },
+    { value: 'Kotlin', label: 'Kotlin' },
+    { value: 'PHP', label: 'PHP' },
+    { value: 'Ruby on Rails', label: 'Ruby on Rails' },
+    { value: 'Vue.js', label: 'Vue.js' },
+    { value: 'Angular', label: 'Angular' },
+    { value: 'Bootstrap', label: 'Bootstrap' },
+    { value: 'Tailwind CSS', label: 'Tailwind CSS' },
+    { value: 'SASS', label: 'SASS' },
+    { value: 'LESS', label: 'LESS' },
+    { value: 'MySQL', label: 'MySQL' },
+    { value: 'PostgreSQL', label: 'PostgreSQL' },
+    { value: 'SQLite', label: 'SQLite' },
+    { value: 'Oracle Database', label: 'Oracle Database' },
+    { value: 'Microsoft SQL Server', label: 'Microsoft SQL Server' },
+    { value: 'NoSQL Databases (e.g., Cassandra, CouchDB)', label: 'NoSQL Databases' },
+    { value: 'AWS', label: 'AWS' },
+    { value: 'Microsoft Azure', label: 'Microsoft Azure' },
+    { value: 'Google Cloud Platform (GCP)', label: 'Google Cloud Platform' },
+    { value: 'Heroku', label: 'Heroku' },
+    { value: 'Git', label: 'Git' },
+    { value: 'GitHub', label: 'GitHub' },
+    { value: 'Jenkins', label: 'Jenkins' },
+    { value: 'Docker', label: 'Docker' },
+    { value: 'Kubernetes', label: 'Kubernetes' },
+    { value: 'Jest', label: 'Jest' },
+    { value: 'Mocha', label: 'Mocha' },
+    { value: 'Cypress', label: 'Cypress' },
+    { value: 'Selenium', label: 'Selenium' },
+    { value: 'Python (Scikit-learn, TensorFlow, PyTorch)', label: 'Python (Data Science)' },
+    { value: 'R', label: 'R' },
+    { value: 'Spark', label: 'Spark' },
+    { value: 'Linux', label: 'Linux' },
+    { value: 'API Development', label: 'API Development' },
+    { value: 'Microservices', label: 'Microservices' },
+];
+
 const CreateJob = () => {
+    const navigate = useNavigate();
+
     const [jobData, setJobData] = useState({
         jobName: '',
         jobDescription: '',
         jobType: '',
         location: '',
         department: '',
-        applicationReleaseDate: getCurrentDate(), // Bu veriyi state'te tutmaya gerek yok
+        applicationReleaseDate: getCurrentDate(),
         applicationDeadline: '',
         jobPicture: '',
-        qualifications: [],
-        companyID: '', // companyID state'i eklenmiş
+        companyID: '',
+        skills: [], // skills field eklendi
     });
 
+    console.log(jobData);
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((user) => {
             if (user) {
@@ -43,7 +95,6 @@ const CreateJob = () => {
     const [qualificationInput, setQualificationInput] = useState('');
     const [file, setFile] = useState(null);
     const [fileError, setFileError] = useState(false);
-    const navigate = useNavigate();
 
     const handleChange = (e) => {
         setJobData({ ...jobData, [e.target.name]: e.target.value });
@@ -60,6 +111,13 @@ const CreateJob = () => {
     const handleFileChange = (e) => {
         setFile(e.target.files[0]);
         setFileError(false);
+    };
+
+    const handleSkillsChange = (selectedOptions) => {
+        setJobData((prevJobData) => ({
+            ...prevJobData,
+            skills: selectedOptions.map(option => option.value),
+        }));
     };
 
     const handleSubmit = async (e) => {
@@ -119,7 +177,7 @@ const CreateJob = () => {
         const year = today.getFullYear();
         const month = String(today.getMonth() + 1).padStart(2, '0');
         const day = String(today.getDate()).padStart(2, '0');
-        return `${day}/${month}/${year}`;
+        return `${year}-${month}-${day}`;
     };
 
     return (
@@ -182,22 +240,17 @@ const CreateJob = () => {
                     required
                 />
                 {fileError && <p style={{ color: 'red' }}>Please upload a job picture</p>}
-                <div>
-                    <input
-                        type="text"
-                        value={qualificationInput}
-                        onChange={(e) => setQualificationInput(e.target.value)}
-                        placeholder="Add a qualification"
+                <label>
+                    Skills
+                    <Select
+                        name="skills"
+                        value={skillsOptions.filter(option => jobData.skills.includes(option.value))}
+                        onChange={handleSkillsChange}
+                        options={skillsOptions}
+                        isMulti
+                        required
                     />
-                    <button type="button" onClick={handleQualificationAdd}>
-                        Add
-                    </button>
-                </div>
-                <ul>
-                    {jobData.qualifications.map((q, index) => (
-                        <li key={index}>{q}</li>
-                    ))}
-                </ul>
+                </label>
                 <button type="submit">Post</button>
             </form>
         </div>
