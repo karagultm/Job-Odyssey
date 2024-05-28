@@ -6,13 +6,34 @@ import '../styles/Cards.css';
 
 const Cards = () => {
     const [jobs, setJobs] = useState([]);
+    const [companies, setCompanies] = useState({});
     const navigate = useNavigate();
 
     useEffect(() => {
         const fetchJobs = async () => {
-            const querySnapshot = await getDocs(collection(firestore, 'jobs'));
-            const jobsData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-            setJobs(jobsData);
+            try {
+                const querySnapshot = await getDocs(collection(firestore, 'jobs'));
+                const jobsData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                setJobs(jobsData);
+
+                const companyIds = [...new Set(jobsData.map(job => job.companyID).filter(companyID => companyID))];
+                const companyData = await Promise.all(
+                    companyIds.map(async (companyID) => {
+                        if (companyID) {
+                            const companyDoc = await getDoc(doc(firestore, 'companies', companyID));
+                            return companyDoc.exists() ? { id: companyID, ...companyDoc.data() } : null;
+                        }
+                        return null;
+                    })
+                );
+                const companiesMap = companyData.reduce((acc, company) => {
+                    if (company) acc[company.id] = company;
+                    return acc;
+                }, {});
+                setCompanies(companiesMap);
+            } catch (error) {
+                console.error("Error fetching jobs or companies:", error);
+            }
         };
 
         fetchJobs();
@@ -30,8 +51,12 @@ const Cards = () => {
                     <div className="content">
                         <div className="header">
                             <div className="flex items-center">
-                                <img src="https://placehold.co/40" alt="Profile Photo" className="w-8 h-8 rounded-full mr-2" />
-                                <span className="title">{job.companyName || "Company Name"}</span>
+                                <img 
+                                    src={companies[job.companyID]?.logo || "https://placehold.co/40"} 
+                                    alt="Profile Photo" 
+                                    className="w-8 h-8 rounded-full mr-2" 
+                                />
+                                <span className="title">{companies[job.companyID]?.companyName || "Company Name"}</span>
                             </div>
                             <span className="text-jt">{job.jobType || "Job Type"}</span>
                         </div>

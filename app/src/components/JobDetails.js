@@ -7,6 +7,7 @@ import '../styles/JobDetails.css';
 const JobDetails = () => {
     const { jobId } = useParams();
     const [job, setJob] = useState(null);
+    const [company, setCompany] = useState(null);
 
     useEffect(() => {
         const fetchJob = async () => {
@@ -21,7 +22,22 @@ const JobDetails = () => {
         fetchJob();
     }, [jobId]);
 
-    if (!job) {
+    useEffect(() => {
+        if (job && job.companyID) {
+            const fetchCompany = async () => {
+                const companyDoc = await getDoc(doc(firestore, 'companies', job.companyID));
+                if (companyDoc.exists()) {
+                    setCompany(companyDoc.data());
+                } else {
+                    console.log("No such company document!");
+                }
+            };
+
+            fetchCompany();
+        }
+    }, [job]);
+
+    if (!job || !company) {
         return <div>Loading...</div>;
     }
 
@@ -31,9 +47,9 @@ const JobDetails = () => {
     return (
         <div className="job-details-container">
             <div className="job-header">
-                <img src={job.companyLogo || "https://placehold.co/100"} alt="Company Logo" className="company-logo" />
+                <img src={company.logo || "https://placehold.co/100"} alt="Company Logo" className="company-logo" />
                 <div>
-                    <h1 className="company-name">{job.companyName || "Company Name"}</h1>
+                    <h1 className="company-name">{company.companyName || "Company Name"}</h1>
                     <h2 className="job-name">{job.jobName || "Job Name"}</h2>
                 </div>
                 <button className="apply-button-header">Apply</button>
@@ -44,7 +60,7 @@ const JobDetails = () => {
                     <h3>Job Description</h3>
                     <p>{job.jobDescription || "Job description details..."}</p>
                     <h3>About Company</h3>
-                    <p>{job.aboutCompany || "About the company details..."}</p>
+                    <p>{company.aboutCompany || "About the company details..."}</p>
                 </div>
                 <div className="job-details">
                     <h3>Details</h3>
