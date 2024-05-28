@@ -5,6 +5,14 @@ import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { firestore, storage, auth } from '../firebase/firebase';
 import '../styles/CreateJob.css';
 
+const getCurrentDate = () => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+};
+
 const CreateJob = () => {
     const [jobData, setJobData] = useState({
         jobName: '',
@@ -12,7 +20,7 @@ const CreateJob = () => {
         jobType: '',
         location: '',
         department: '',
-        applicationReleaseDate: '', // Bu veriyi state'te tutmaya gerek yok
+        applicationReleaseDate: getCurrentDate(), // Bu veriyi state'te tutmaya gerek yok
         applicationDeadline: '',
         jobPicture: '',
         qualifications: [],
@@ -105,13 +113,7 @@ const CreateJob = () => {
         }
     };
 
-    const getCurrentDate = () => {
-        const today = new Date();
-        const year = today.getFullYear();
-        const month = String(today.getMonth() + 1).padStart(2, '0');
-        const day = String(today.getDate()).padStart(2, '0');
-        return `${year}-${month}-${day}`;
-    };
+
 
     const getMaxDate = () => {
         const today = new Date();
