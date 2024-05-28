@@ -64,7 +64,7 @@ const JobDetails = () => {
         return <div>Loading...</div>;
     }
 
-    const qualifications = Array.isArray(job.qualifications) ? job.qualifications : (job.qualifications || "").split(',').map(qual => qual.trim());
+    const skills = Array.isArray(job.skills) ? job.skills : (job.skills || "").split(',').map(skill => skill.trim());
 
     return (
         <div className="job-details-container">
@@ -99,15 +99,16 @@ const JobDetails = () => {
                     <hr />
                     <p><strong>Location</strong><br />{job.location || "e.g. Locations"}</p>
                     <hr />
-                    <p><strong>Required Qualifications</strong></p>
+                    <p><strong>Required Skills</strong></p>
                     <div className="qualifications-container">
-                        {qualifications.map((qual, index) => (
-                            <span key={index} className="qualification-bubble">{qual}</span>
+                        {skills.map((skill, index) => (
+                            <span key={index} className="qualification-bubble">{skill}</span>
                         ))}
                     </div>
                     <button className="apply-button" onClick={handleApplyNow}>Apply Now</button>
                 </div>
             </div>
+            <ToastContainer />
         </div>
     );
 };
