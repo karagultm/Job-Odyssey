@@ -55,7 +55,6 @@ const AppliedJobs = () => {
                     <p><strong>Company:</strong> {job.companyName || "Company Name"}</p>
                     <p><strong>Department:</strong> {job.department || "Department"}</p>
                     <p><strong>Location:</strong> {job.location || "Location"}</p>
-                    <p><strong>Salary:</strong> {job.salary || "Salary"}</p>
                     <Link to={`/job/${job.id}`}>
                         <button className="view-job-button">View Job</button>
                     </Link>
