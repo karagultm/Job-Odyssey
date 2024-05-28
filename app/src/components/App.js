@@ -14,16 +14,14 @@ import CompanyAuth from "./CompanyAuth";
 import CreateJob from "./CreateJob";
 import MyProfile from "./MyProfile";
 import EditProfile from "./EditProfile";
-
 import RegisteredCompanies from "./RegisteredCompanies";
 import ViewCompanyProfile from "./ViewCompanyProfile";
-
 import JobDetails from "./JobDetails";
 import CompanyProfile from "./CompanyProfile";
 import EditCompanyProfile from "./EditCompanyProfile";
 import ExternalCompanies from "./ExternalCompanies";
 import AppliedJobs from "./AppliedJobs";
-
+import FilterJobs from "./FilterJobs"; // Import the new component
 
 function App() {
   const [refreshKey, setRefreshKey] = useState(0); // Add key state
@@ -50,12 +48,11 @@ function App() {
           <Route path="/edit-profile" element={<EditProfile />} />
           <Route path="/my-profile" element={<MyProfile />} />
           <Route path="/job/:jobId" element={<JobDetails/>} />
-        
           <Route path="/company-profile" element={<CompanyProfile />} />
-          <Route path="/company/:companyId" element={<ViewCompanyProfile />} /> {/* Dynamic route */}
-
+          <Route path="/company/:companyId" element={<ViewCompanyProfile />} />
           <Route path="/edit-company-profile" element={<EditCompanyProfile />} />
           <Route path="/applied-jobs" element={<AppliedJobs />} />
+          <Route path="/filtered-jobs" element={<FilterJobs />} /> {/* Add the new route */}
         </Routes>
         <Footer />
       </div>

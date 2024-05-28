@@ -42,7 +42,7 @@ const Navbar = () => {
           <Link to="/companies">Companies</Link>
         </li>
         <li>
-          <Link to="/ilanlar">İlanlar</Link>
+          <Link to="/filtered-jobs">Sana Özel İlanlar</Link>
         </li>
         {userType === "company" && (
           <><li>
