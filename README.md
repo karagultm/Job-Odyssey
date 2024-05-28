@@ -5,13 +5,13 @@
 Corporate Login Page
 Personal Sign-Up Page
 Corporate Sign-Up Page~~
-Jobs Page
-	iş ilanları ik olcak- database den çekicez
-~~Job Post Page
-	kullanıcı burayı görüyorr başvuruyo- carddan geliyorsun buraya
+~~Jobs Page
+	iş ilanları ik olcak- database den çekicez~~
+~~~~Job Post Page
+	kullanıcı burayı görüyorr başvuruyo- carddan geliyorsun buraya~~
 
-Other Jobs Page
-	web scrabing en son denememiz
+~~Other Jobs Page
+	web scrabing en son denememiz~~
 
 ~~Create Jobs Page
 	iş ilanını oluşturma ve database ekleme %90da~~
