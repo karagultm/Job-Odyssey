@@ -105,15 +105,13 @@ const CreateJob = () => {
 
     const addJob = async (pictureUrl) => {
         try {
-            await addDoc(collection(firestore, 'jobs'), { ...jobData, jobPicture: pictureUrl });
+            await addDoc(collection(firestore, 'jobs'), { ...jobData, jobPicture: pictureUrl, appliedApplications: [] });
             alert('Job posted successfully!');
             navigate('/');
         } catch (e) {
             console.error('Error adding job: ', e);
         }
     };
-
-
 
     const getMaxDate = () => {
         const today = new Date();
