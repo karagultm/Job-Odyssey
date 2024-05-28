@@ -113,7 +113,7 @@ const ViewCompanyProfile = () => {
                 <p className='text-dep'><strong>Description:</strong> {job.jobDescription}</p>
                 <p><strong>Location:</strong> {job.location}</p>
                 <p><strong>Job Type:</strong> {job.jobType}</p>
-                <p><strong>Qualifications:</strong> {job.qualifications.join(', ')}</p>
+                <p><strong>Qualifications:</strong> {job.qualifications ? job.qualifications.join(', ') : 'N/A'}</p>
                 <button onClick={() => handleJobClick(job.id)}>View Job</button>
               </li>
             ))}
