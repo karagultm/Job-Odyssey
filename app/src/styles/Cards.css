@@ -1,3 +1,10 @@
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 16px;
+}
+
 .card {
     box-sizing: border-box;
     width: 320px;
@@ -7,10 +14,11 @@
     box-shadow: 12px 17px 51px rgba(0, 0, 0, 0.22);
     backdrop-filter: blur(6px);
     border-radius: 17px;
-    text-align: center;
+    text-align: left;
     cursor: pointer;
     transition: all 0.5s;
     display: flex;
+    flex-direction: column; /* İçeriği dikey hizalama */
     align-items: center;
     justify-content: center;
     user-select: none;
@@ -27,8 +35,46 @@
     transform: scale(0.95) rotateZ(1.7deg);
 }
 
-.cards-container {
+.card img {
+    width: 310px; /* Resmin genişliğini px olarak ayarlayın */
+    height: 200px; /* Resmin yüksekliğini px olarak ayarlayın */
+    border-radius: 20px 20px 0 0; /* Üst köşeleri yuvarla */
+    object-fit: cover; /* Resmi kutunun boyutlarına sığdırmak için */
+}
+
+.card .content {
+    padding: 16px;
+    width: 100%; /* İçerik genişliğini karta uyacak şekilde yap */
+}
+
+.card .content .header {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between; /* veya istediğiniz diğer bir yatay hizalama yöntemi */
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.card .content .header img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.card .content .header .title {
+    font-weight: bold;
+}
+
+.card .content .body {
+    font-size: 14px;
+    color: #666;
+}
+
+.card .content .text-lg {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.card .content .text-sm {
+    font-size: 14px;
+    color: #666;
 }

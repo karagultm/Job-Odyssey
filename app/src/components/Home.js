@@ -21,8 +21,6 @@ const Home = () => {
                 <div className="cards-container">
                     {/* <CreateJob /> */}
                     <Cards />
-                    <Cards />
-                    <Cards />
                     {/* Burada tüm iş ilanlarını göstereceğiz */}
                 </div>
             </div>
