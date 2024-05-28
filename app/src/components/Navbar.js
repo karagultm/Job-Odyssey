@@ -39,7 +39,7 @@ const Navbar = () => {
       </div>
       <ul className="navbar-menu">
         <li>
-          <Link to="/sirketler">Şirketler</Link>
+          <Link to="/companies">Companies</Link>
         </li>
         <li>
           <Link to="/ilanlar">İlanlar</Link>

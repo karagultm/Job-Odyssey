@@ -14,10 +14,12 @@ import CompanyAuth from "./CompanyAuth";
 import CreateJob from "./CreateJob";
 import MyProfile from "./MyProfile";
 import EditProfile from "./EditProfile";
+import RegisteredCompanies from "./RegisteredCompanies";
 import JobDetails from "./JobDetails";
 import CompanyProfile from "./CompanyProfile";
 import EditCompanyProfile from "./EditCompanyProfile";
 import ExternalCompanies from "./ExternalCompanies";
+
 
 function App() {
   const [refreshKey, setRefreshKey] = useState(0); // Add key state
@@ -39,6 +41,7 @@ function App() {
           <Route path="/aday-kayit" element={<ApplicantAuth refreshNavbar={refreshNavbar}/>} />
           <Route path="/sirket-kayit" element={<CompanyAuth refreshNavbar={refreshNavbar} />} />
           <Route path="/external-companies" element={<ExternalCompanies />} />
+          <Route path="/companies" element={<RegisteredCompanies />} />
           <Route path="/is-paylas" element={<CreateJob />} />
           <Route path="/edit-profile" element={<EditProfile />} />
           <Route path="/my-profile" element={<MyProfile />} />
