@@ -12,10 +12,7 @@ const Home = () => {
                     <Searchbar />
                 </div>
             </div>
-            <div className="job-section">
-                <h2>Öne Çıkan İlanlar</h2>
-                {/* Burada öne çıkan iş ilanlarını göstereceğiz */}
-            </div>
+
             <div className="all-jobs-section">
                 <h2>Tüm İlanlar</h2>
                 <div className="cards-container">
