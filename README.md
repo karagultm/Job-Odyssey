@@ -32,7 +32,6 @@ Company Edit Profile Page
 My Posts Page
 	İş ilanlarım- company paylaşılan iş ilanları
 
-
 Installizations
 node.js indir
 
@@ -45,48 +44,36 @@ npm install react-select
 npm start
 My React Project
 
-
-
 This is the initial setup for my React project. Below are the steps required to set up the environment and start the project.
-
-
 
 ## Installations
 
-1. **Install Node.js**: Download and install Node.js from [here](https://nodejs.org/).
-2. **Navigate to the Project Directory**: Open your terminal and navigate to your project directory.
+#### **Install Node.js**
+
+Download and install Node.js from [here](https://nodejs.org/).
+
+#### **Navigate to the Project Directory**:
+
+Open your terminal and navigate to your project directory.
+
 ```
 cd app
 ```
 
-3. Install Create React App Globally: This command installs the Create React App tool globally on your system.
-
-
-
-sh
-
-Kodu kopyala
-
-npm install -g create-react-app
-
-Install Project Dependencies:
-
-
+#### Install Project Dependencies:
 
 React Select: A flexible and beautiful Select Input control for React.
 
-sh
-
-Kodu kopyala
-
+```
 npm install react-select
+```
 
-Start the Project: This command starts the development server.
+In the project directory, you can run:
 
+`npm start`
 
+Runs the app in the development mode.
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-sh
-
-Kodu kopyala
-
-npm start
+The page will reload when you make changes.
+You may also see any lint errors in the console.
