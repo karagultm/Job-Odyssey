@@ -45,9 +45,12 @@ const Navbar = () => {
           <Link to="/ilanlar">İlanlar</Link>
         </li>
         {userType === "company" && (
-          <li>
+          <><li>
             <Link to="/is-paylas">İş Paylaş</Link>
           </li>
+          <li>
+              <Link to="/company-profile">Company Profile</Link>
+            </li></>
         )}
         {userType === "applicant" && (
           <li>
