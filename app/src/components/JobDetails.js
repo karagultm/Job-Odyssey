@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, updateDoc, arrayUnion } from 'firebase/firestore';
+import { getAuth } from 'firebase/auth';  // Import getAuth from Firebase Authentication
 import { firestore } from '../firebase/firebase';
 import '../styles/JobDetails.css';
+import { ToastContainer, toast } from 'react-toastify';
 
 const JobDetails = () => {
     const { jobId } = useParams();
     const [job, setJob] = useState(null);
     const [company, setCompany] = useState(null);
+    const auth = getAuth();  // Initialize auth
 
     useEffect(() => {
         const fetchJob = async () => {
@@ -37,11 +40,30 @@ const JobDetails = () => {
         }
     }, [job]);
 
+    const handleApplyNow = async () => {
+        const user = auth.currentUser;
+        if (!user) {
+            console.log("No user is signed in");
+            return;
+        }
+
+        const applicantID = user.uid;
+        const jobRef = doc(firestore, 'jobs', jobId);
+
+        try {
+            await updateDoc(jobRef, {
+                appliedApplications: arrayUnion(applicantID)
+            });
+            toast.success("Application successful!");
+        } catch (error) {
+            console.error("Error applying for job: ", error);
+        }
+    };
+
     if (!job || !company) {
         return <div>Loading...</div>;
     }
 
-    // qualifications verisinin bir dizi olduğunu kontrol et
     const qualifications = Array.isArray(job.qualifications) ? job.qualifications : (job.qualifications || "").split(',').map(qual => qual.trim());
 
     return (
@@ -52,7 +74,7 @@ const JobDetails = () => {
                     <h1 className="company-name">{company.companyName || "Company Name"}</h1>
                     <h2 className="job-name">{job.jobName || "Job Name"}</h2>
                 </div>
-                <button className="apply-button-header">Apply</button>
+                <button className="apply-button-header" onClick={handleApplyNow}>Apply</button>
             </div>
             <div className="job-body">
                 <div className="job-description">
@@ -83,7 +105,7 @@ const JobDetails = () => {
                             <span key={index} className="qualification-bubble">{qual}</span>
                         ))}
                     </div>
-                    <button className="apply-button">Apply Now</button>
+                    <button className="apply-button" onClick={handleApplyNow}>Apply Now</button>
                 </div>
             </div>
         </div>
