@@ -73,8 +73,8 @@ const ViewCompanyProfile = () => {
     navigate('/edit-company-profile');
   };
 
-  const handleJobClick = (jobId) => {
-    navigate(`/job/${jobId}`);
+  const handleShowApplicants = (jobId) => {
+    navigate(`/show-applicants/${jobId}`);
   };
 
   return (
@@ -114,7 +114,7 @@ const ViewCompanyProfile = () => {
                 <p><strong>Location:</strong> {job.location}</p>
                 <p><strong>Job Type:</strong> {job.jobType}</p>
                 <p><strong>Qualifications:</strong> {job.qualifications ? job.qualifications.join(', ') : 'N/A'}</p>
-                <button onClick={() => handleJobClick(job.id)}>View Job</button>
+                <button onClick={() => handleShowApplicants(job.appliedApplications)}>Show Applicant</button>
               </li>
             ))}
           </ul>

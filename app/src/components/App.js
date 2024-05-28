@@ -23,7 +23,7 @@ import CompanyProfile from "./CompanyProfile";
 import EditCompanyProfile from "./EditCompanyProfile";
 import ExternalCompanies from "./ExternalCompanies";
 import AppliedJobs from "./AppliedJobs";
-
+import ShowApplicants from "./ShowApplicants";
 
 function App() {
   const [refreshKey, setRefreshKey] = useState(0); // Add key state
@@ -56,6 +56,7 @@ function App() {
 
           <Route path="/edit-company-profile" element={<EditCompanyProfile />} />
           <Route path="/applied-jobs" element={<AppliedJobs />} />
+          <Route path="/show-applicants/:jobId" element={<ShowApplicants />} />
         </Routes>
         <Footer />
       </div>
