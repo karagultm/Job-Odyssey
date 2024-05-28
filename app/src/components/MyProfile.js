@@ -44,23 +44,25 @@ const ViewProfile = () => {
           const docSnap = await getDoc(docRef);
           if (docSnap.exists()) {
             const userData = docSnap.data();
+            const personalData = userData.personalInfo || {};
+
             setPersonalInfo((prevInfo) => ({
               ...prevInfo,
               name: userData.fullName || '',
-              location: userData.personalInfo.location || '',
-              aboutMe: userData.personalInfo.aboutMe || '',
-              skills: userData.personalInfo.skills || '',
-              salaryExpectation: userData.personalInfo.salaryExpectation || '',
-              phoneNumber: userData.personalInfo.phoneNumber || '',
-              nationalId: userData.personalInfo.nationalId || '',
-              nationality: userData.personalInfo.nationality || '',
-              birthDate: userData.personalInfo.birthDate || '',
-              gender: userData.personalInfo.gender || '',
-              birthLocation: userData.personalInfo.birthLocation || '',
-              driversLicense: userData.personalInfo.driversLicense || '',
-              militaryStatus: userData.personalInfo.militaryStatus || '',
-              searchingNewOpportunities: userData.personalInfo.searchingNewOpportunities || false,
-              schoolInternshipMatch: userData.personalInfo.schoolInternshipMatch || false,
+              location: personalData.location || '',
+              aboutMe: personalData.aboutMe || '',
+              skills: personalData.skills || '',
+              salaryExpectation: personalData.salaryExpectation || '',
+              phoneNumber: personalData.phoneNumber || '',
+              nationalId: personalData.nationalId || '',
+              nationality: personalData.nationality || '',
+              birthDate: personalData.birthDate || '',
+              gender: personalData.gender || '',
+              birthLocation: personalData.birthLocation || '',
+              driversLicense: personalData.driversLicense || '',
+              militaryStatus: personalData.militaryStatus || '',
+              searchingNewOpportunities: personalData.searchingNewOpportunities || false,
+              schoolInternshipMatch: personalData.schoolInternshipMatch || false,
               address: userData.address || '',
               email: userData.email || '',
               title: userData.title || ''

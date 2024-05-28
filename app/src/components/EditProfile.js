@@ -101,24 +101,26 @@ const MyProfile = ({ refreshNavbar }) => {
           const docSnap = await getDoc(docRef);
           if (docSnap.exists()) {
             const userData = docSnap.data();
+            const personalInfo = userData.personalInfo || {};
+  
             setPersonalInfo((prevInfo) => ({
               ...prevInfo,
               name: userData.fullName || '',
-              location: userData.personalInfo.location || '',
-              aboutMe: userData.personalInfo.aboutMe || '',
-              skills: userData.personalInfo.skills || [],
-              salaryExpectation: userData.personalInfo.salaryExpectation || '',
-              phoneNumber: userData.personalInfo.phoneNumber || '',
-              nationalId: userData.personalInfo.nationalId || '',
-              nationality: userData.personalInfo.nationality || '',
-              birthDate: userData.personalInfo.birthDate || '',
-              gender: userData.personalInfo.gender || '',
-              birthLocation: userData.personalInfo.birthLocation || '',
-              driversLicense: userData.personalInfo.driversLicense || [],
-              deferralDate: userData.personalInfo.deferralDate || '',
-              militaryStatus: userData.personalInfo.militaryStatus || '',
-              searchingNewOpportunities: userData.personalInfo.searchingNewOpportunities || false,
-              schoolInternshipMatch: userData.personalInfo.schoolInternshipMatch || false,
+              location: personalInfo.location || '',
+              aboutMe: personalInfo.aboutMe || '',
+              skills: personalInfo.skills || [],
+              salaryExpectation: personalInfo.salaryExpectation || '',
+              phoneNumber: personalInfo.phoneNumber || '',
+              nationalId: personalInfo.nationalId || '',
+              nationality: personalInfo.nationality || '',
+              birthDate: personalInfo.birthDate || '',
+              gender: personalInfo.gender || '',
+              birthLocation: personalInfo.birthLocation || '',
+              driversLicense: personalInfo.driversLicense || [],
+              deferralDate: personalInfo.deferralDate || '',
+              militaryStatus: personalInfo.militaryStatus || '',
+              searchingNewOpportunities: personalInfo.searchingNewOpportunities || false,
+              schoolInternshipMatch: personalInfo.schoolInternshipMatch || false,
               address: userData.address || '',
               email: userData.email || '',
               title: userData.title || ''
@@ -136,9 +138,10 @@ const MyProfile = ({ refreshNavbar }) => {
         }
       }
     };
-
+  
     fetchUserData();
   }, []);
+  
 
   const handleInputChange = (e) => {
     const { name, value, type, checked, options } = e.target;
