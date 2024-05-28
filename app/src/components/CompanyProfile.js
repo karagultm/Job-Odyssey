@@ -110,7 +110,7 @@ const ViewCompanyProfile = () => {
               <li key={index}>
                 <h4>{job.jobName}</h4>
                 <p><strong>Department:</strong> {job.department}</p>
-                <p><strong>Description:</strong> {job.jobDescription}</p>
+                <p className='text-dep'><strong>Description:</strong> {job.jobDescription}</p>
                 <p><strong>Location:</strong> {job.location}</p>
                 <p><strong>Job Type:</strong> {job.jobType}</p>
                 <p><strong>Qualifications:</strong> {job.qualifications.join(', ')}</p>
