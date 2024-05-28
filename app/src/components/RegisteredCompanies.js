@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import '../styles/ExternalCompanies.css'; // Reuse the same CSS
+import '../styles/ExternalCompanies.css';
 import { collection, getDocs } from "firebase/firestore";
-import { firestore } from "../firebase/firebase"; // Import firestore from your Firebase configuration
+import { firestore } from "../firebase/firebase";
+import { useNavigate } from 'react-router-dom';
 
 const RegisteredCompanies = () => {
   const [companies, setCompanies] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCompanies = async () => {
@@ -23,12 +25,20 @@ const RegisteredCompanies = () => {
     fetchCompanies();
   }, []);
 
+  const handleCompanyClick = (companyId) => {
+    navigate(`/company/${companyId}`);
+  };
+
   return (
     <div className="external-companies-page">
       <h1>Registered Companies</h1>
       <div className="external-cards-container">
         {companies.map(company => (
-          <div className="external-card" key={company.id}>
+          <div
+            className="external-card"
+            key={company.id}
+            onClick={() => handleCompanyClick(company.id)}
+          >
             <div className="external-card-header">
               <div className="external-card-title">{company.companyName}</div>
             </div>

@@ -14,7 +14,10 @@ import CompanyAuth from "./CompanyAuth";
 import CreateJob from "./CreateJob";
 import MyProfile from "./MyProfile";
 import EditProfile from "./EditProfile";
+
 import RegisteredCompanies from "./RegisteredCompanies";
+import ViewCompanyProfile from "./ViewCompanyProfile";
+
 import JobDetails from "./JobDetails";
 import CompanyProfile from "./CompanyProfile";
 import EditCompanyProfile from "./EditCompanyProfile";
@@ -49,6 +52,8 @@ function App() {
           <Route path="/job/:jobId" element={<JobDetails/>} />
         
           <Route path="/company-profile" element={<CompanyProfile />} />
+          <Route path="/company/:companyId" element={<ViewCompanyProfile />} /> {/* Dynamic route */}
+
           <Route path="/edit-company-profile" element={<EditCompanyProfile />} />
           <Route path="/applied-jobs" element={<AppliedJobs />} />
         </Routes>
