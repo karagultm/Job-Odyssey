@@ -14,12 +14,14 @@ Other Jobs Page
 	web scrabing en son denememiz
 Create Jobs Page
 	iş ilanını oluşturma ve database ekleme %90da
+
+
 Applicants Page.
 	iş ilanına başvuranları görüyoruz
-My Profile Page
-	kendi sayfam--- edit deyince kadirinkine demieyince youthall direkt göstersin
+~~My Profile Page
+	kendi sayfam--- edit deyince kadirinkine demieyince youthall direkt göstersin~~
 
-Myprofile edit page
+~~Myprofile edit page~~
 
 Applied Jobs Page
 	başvuduğumuz işler 
