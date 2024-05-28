@@ -59,7 +59,7 @@ const Navbar = () => {
               <Link to="/applied-jobs">Applied Jobs</Link>
             </li></>
         )}
-        {userType == "applicant" && (
+        {userType === "applicant" && (
           <li>
             <Link to="/my-profile">Profilim</Link>
           </li>
