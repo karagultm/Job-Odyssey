@@ -15,6 +15,7 @@ import CreateJob from "./CreateJob";
 import MyProfile from "./MyProfile";
 import EditProfile from "./EditProfile";
 import CompanyProfile from "./CompanyProfile";
+import EditCompanyProfile from "./EditCompanyProfile";
 
 function App() {
   const [refreshKey, setRefreshKey] = useState(0); // Add key state
@@ -39,6 +40,7 @@ function App() {
           <Route path="/edit-profile" element={<EditProfile />} />
           <Route path="/my-profile" element={<MyProfile />} />
           <Route path="/company-profile" element={<CompanyProfile />} />
+          <Route path="/edit-company-profile" element={<EditCompanyProfile />} />
         </Routes>
         <Footer />
       </div>
