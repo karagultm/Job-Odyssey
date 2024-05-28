@@ -24,7 +24,7 @@ const Cards = () => {
                         <div className="header">
                             <div className="flex items-center">
                                 <img src="https://placehold.co/40" alt="Profile Photo" className="w-8 h-8 rounded-full mr-2" />
-                                <span className="title">{job.companyName || "Company Name"}</span>
+                                <span className="title">{job.companyID || "Company Name"}</span>
                             </div>
                             <span className="text-sm">{job.salaryType || "Salary Type"}</span>
                         </div>
