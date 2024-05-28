@@ -53,9 +53,11 @@ const Navbar = () => {
             </li></>
         )}
         {userType === "applicant" && (
-          <li>
+          <><li>
             <Link to="/external-companies">External Companies</Link>
-          </li>
+          </li><li>
+              <Link to="/applied-jobs">Applied Jobs</Link>
+            </li></>
         )}
         {userType && (
           <li>

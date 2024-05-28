@@ -19,6 +19,7 @@ import JobDetails from "./JobDetails";
 import CompanyProfile from "./CompanyProfile";
 import EditCompanyProfile from "./EditCompanyProfile";
 import ExternalCompanies from "./ExternalCompanies";
+import AppliedJobs from "./AppliedJobs";
 
 
 function App() {
@@ -46,9 +47,10 @@ function App() {
           <Route path="/edit-profile" element={<EditProfile />} />
           <Route path="/my-profile" element={<MyProfile />} />
           <Route path="/job/:jobId" element={<JobDetails/>} />
-
+        
           <Route path="/company-profile" element={<CompanyProfile />} />
           <Route path="/edit-company-profile" element={<EditCompanyProfile />} />
+          <Route path="/applied-jobs" element={<AppliedJobs />} />
         </Routes>
         <Footer />
       </div>
