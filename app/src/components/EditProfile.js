@@ -291,6 +291,7 @@ const MyProfile = ({ refreshNavbar }) => {
         <label>
           Gender
         <select name="gender" value={personalInfo.gender} onChange={handleInputChange} required>
+          <option value=""> Seçiniz </option>
           <option value="Male">Male</option>
           <option value="Female">Female</option>
         </select>
