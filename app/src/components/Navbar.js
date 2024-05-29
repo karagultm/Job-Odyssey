@@ -94,10 +94,10 @@ const Navbar = () => {
         ) : (
           <>
             <Link to="/aday-kayit">
-              <button className="btn blue">Kayıt Ol</button>
+              <button className="btn blue">Sign In</button>
             </Link>
             <Link to="/sirket-kayit">
-              <button className="btn red">Şirket Kayıt</button>
+              <button className="btn red">For Companies</button>
             </Link>
           </>
         )}

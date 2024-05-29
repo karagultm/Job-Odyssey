@@ -107,14 +107,14 @@ const ViewCompanyProfile = () => {
         {jobs.length > 0 ? (
           <ul>
             {jobs.map((job, index) => (
-              <li key={index}>
+              <li key={index} className='job-bubble'>
                 <h4>{job.jobName}</h4>
                 <p><strong>Department:</strong> {job.department}</p>
                 <p className='text-dep'><strong>Description:</strong> {job.jobDescription}</p>
                 <p><strong>Location:</strong> {job.location}</p>
                 <p><strong>Job Type:</strong> {job.jobType}</p>
                 <p><strong>Qualifications:</strong> {job.qualifications ? job.qualifications.join(', ') : 'N/A'}</p>
-                <button onClick={() => handleShowApplicants(job.id)}>Show Applicants</button>
+                <button className="view-job-button" onClick={() => handleShowApplicants(job.id)}>Show Applicants</button>
               </li>
             ))}
           </ul>
