@@ -42,7 +42,7 @@ const Navbar = () => {
           <Link to="/companies">Companies</Link>
         </li>
         <li>
-          <Link to="/filtered-jobs">Sana Özel İlanlar</Link>
+          <Link to="/matched-jobs">Sana Özel İlanlar</Link>
         </li>
         {userType === "company" && (
           <><li>
@@ -68,7 +68,7 @@ const Navbar = () => {
       <div className="navbar-buttons">
         {userType === "company" ? (
           <>
-            <Link to="/company-dashboard">
+            <Link to="/company-profile">
               <button className="btn green">Company Dashboard</button>
             </Link>
             <button className="btn red" onClick={handleLogout}>
@@ -77,7 +77,7 @@ const Navbar = () => {
           </>
         ) : userType === "applicant" ? (
           <>
-            <Link to="/applicant-dashboard">
+            <Link to="/my-profile">
               <button className="btn blue">Applicant Dashboard</button>
             </Link>
             <button className="btn red" onClick={handleLogout}>

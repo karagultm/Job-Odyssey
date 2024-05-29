@@ -16,11 +16,16 @@ import MyProfile from "./MyProfile";
 import EditProfile from "./EditProfile";
 import RegisteredCompanies from "./RegisteredCompanies";
 import ViewCompanyProfile from "./ViewCompanyProfile";
+import ViewProfile from "./ViewProfile";
+
 import JobDetails from "./JobDetails";
 import CompanyProfile from "./CompanyProfile";
 import EditCompanyProfile from "./EditCompanyProfile";
 import ExternalCompanies from "./ExternalCompanies";
+
 import AppliedJobs from "./AppliedJobs";
+import MatchedJobs from "./MatchedJobs";
+
 import ShowApplicants from "./ShowApplicants";
 import FilterJobs from "./FilterJobs"; // Import the new component
 
@@ -53,7 +58,9 @@ function App() {
           <Route path="/company/:companyId" element={<ViewCompanyProfile />} />
           <Route path="/edit-company-profile" element={<EditCompanyProfile />} />
           <Route path="/applied-jobs" element={<AppliedJobs />} />
+          <Route path="/matched-jobs" element={<MatchedJobs />} />
           <Route path="/show-applicants/:jobId" element={<ShowApplicants />} />
+          <Route path="/view-profile/:applicantId" element={<ViewProfile />} />
           <Route path="/filtered-jobs" element={<FilterJobs />} /> {/* Add the new route */}
         </Routes>
         <Footer />

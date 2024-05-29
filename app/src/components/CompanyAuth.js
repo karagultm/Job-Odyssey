@@ -78,7 +78,7 @@ const CompanyAuth = ({ refreshNavbar }) => {
       refreshNavbar(); // Refresh the navbar to update the user type
       toast.success("Logged in successfully!");
       // Retrieve user data to determine user type
-      navigate("/sirket-anasayfa");
+      navigate("/company-profile");
     } catch (error) {
       console.error("Error logging in: ", error);
       toast.error(error.message);

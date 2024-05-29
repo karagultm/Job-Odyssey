@@ -114,7 +114,7 @@ const ViewCompanyProfile = () => {
                 <p><strong>Location:</strong> {job.location}</p>
                 <p><strong>Job Type:</strong> {job.jobType}</p>
                 <p><strong>Qualifications:</strong> {job.qualifications ? job.qualifications.join(', ') : 'N/A'}</p>
-                <button onClick={() => handleShowApplicants(job.appliedApplications)}>Show Applicant</button>
+                <button onClick={() => handleShowApplicants(job.id)}>Show Applicants</button>
               </li>
             ))}
           </ul>
