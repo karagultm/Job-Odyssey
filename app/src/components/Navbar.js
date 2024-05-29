@@ -41,23 +41,30 @@ const Navbar = () => {
         <li>
           <Link to="/companies">Companies</Link>
         </li>
-        <li>
-          <Link to="/matched-jobs">Sana Özel İlanlar</Link>
-        </li>
-        {userType === "company" && (
-          <><li>
-            <Link to="/is-paylas">İş Paylaş</Link>
-          </li>
+        {userType !== "company" && (
           <li>
+            <Link to="/matched-jobs">Sana Özel İlanlar</Link>
+          </li>
+        )}
+        {userType === "company" && (
+          <>
+            <li>
+              <Link to="/is-paylas">İş Paylaş</Link>
+            </li>
+            <li>
               <Link to="/company-profile">Company Profile</Link>
-            </li></>
+            </li>
+          </>
         )}
         {userType === "applicant" && (
-          <><li>
-            <Link to="/external-companies">External Companies</Link>
-          </li><li>
+          <>
+            <li>
+              <Link to="/external-companies">External Companies</Link>
+            </li>
+            <li>
               <Link to="/applied-jobs">Applied Jobs</Link>
-            </li></>
+            </li>
+          </>
         )}
         {userType === "applicant" && (
           <li>
