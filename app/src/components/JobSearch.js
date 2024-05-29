@@ -45,14 +45,16 @@ const JobSearch = () => {
     navigate(`/job/${jobId}`);
   };
 
-  const filteredJobs = jobs.filter(job => {
-    const jobName = job.jobName?.toLowerCase() || '';
-    const jobDescription = job.jobDescription?.toLowerCase() || '';
-    const companyName = companies[job.companyID]?.companyName?.toLowerCase() || '';
+  const filteredJobs = searchTerm
+    ? jobs.filter(job => {
+        const jobName = job.jobName?.toLowerCase() || '';
+        const jobDescription = job.jobDescription?.toLowerCase() || '';
+        const companyName = companies[job.companyID]?.companyName?.toLowerCase() || '';
 
-    const searchTermLower = searchTerm.toLowerCase();
-    return jobName.includes(searchTermLower) || jobDescription.includes(searchTermLower) || companyName.includes(searchTermLower);
-  });
+        const searchTermLower = searchTerm.toLowerCase();
+        return jobName.includes(searchTermLower) || jobDescription.includes(searchTermLower) || companyName.includes(searchTermLower);
+      })
+    : [];
 
   const handleSearch = (term) => {
     setSearchTerm(term);
@@ -62,26 +64,28 @@ const JobSearch = () => {
     <div>
       <Searchbar onSearch={handleSearch} />
       <div className="cards-container">
-        {filteredJobs.map((job) => (
-          <div key={job.id} className="card" onClick={() => handleCardClick(job.id)}>
-            <img src={job.jobPicture || "https://placehold.co/300x200"} alt="Job Image" className="w-full h-48 object-cover rounded-t-lg" />
-            <div className="content">
-              <div className="header">
-                <div className="flex items-center">
-                  <img 
-                    src={companies[job.companyID]?.logo || "https://placehold.co/40"} 
-                    alt="Profile Photo" 
-                    className="w-8 h-8 rounded-full mr-2" 
-                  />
-                  <span className="title">{companies[job.companyID]?.companyName || "Company Name"}</span>
+        {filteredJobs.length > 0 &&
+          filteredJobs.map((job) => (
+            <div key={job.id} className="card" onClick={() => handleCardClick(job.id)}>
+              <img src={job.jobPicture || "https://placehold.co/300x200"} alt="Job Image" className="w-full h-48 object-cover rounded-t-lg" />
+              <div className="content">
+                <div className="header">
+                  <div className="flex items-center">
+                    <img 
+                      src={companies[job.companyID]?.logo || "https://placehold.co/40"} 
+                      alt="Profile Photo" 
+                      className="w-8 h-8 rounded-full mr-2" 
+                    />
+                    <span className="title">{companies[job.companyID]?.companyName || "Company Name"}</span>
+                  </div>
+                  <span className="text-jt">{job.jobType || "Job Type"}</span>
                 </div>
-                <span className="text-jt">{job.jobType || "Job Type"}</span>
+                <p className="text-lg">{job.jobName || "Job Title"}</p>
+                <p className="text-dep">{job.jobDescription || "Job Description"}</p>
               </div>
-              <p className="text-lg">{job.jobName || "Job Title"}</p>
-              <p className="text-dep">{job.jobDescription || "Job Description"}</p>
             </div>
-          </div>
-        ))}
+          ))
+        }
       </div>
     </div>
   );
