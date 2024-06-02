@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/job-odyssey/static/css/main.6a82a79f.css",
+    "main.js": "/job-odyssey/static/js/main.3e0ad66f.js",
+    "static/js/453.a6a97343.chunk.js": "/job-odyssey/static/js/453.a6a97343.chunk.js",
+    "index.html": "/job-odyssey/index.html",
+    "main.6a82a79f.css.map": "/job-odyssey/static/css/main.6a82a79f.css.map",
+    "main.3e0ad66f.js.map": "/job-odyssey/static/js/main.3e0ad66f.js.map",
+    "453.a6a97343.chunk.js.map": "/job-odyssey/static/js/453.a6a97343.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6a82a79f.css",
+    "static/js/main.3e0ad66f.js"
+  ]
+}
