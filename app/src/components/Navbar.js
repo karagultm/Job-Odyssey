@@ -43,7 +43,7 @@ const Navbar = () => {
         </li>
         {userType !== "company" && (
           <li>
-            <Link to="/matched-jobs">Sana Özel İlanlar</Link>
+            <Link to="/matched-jobs">For You</Link>
           </li>
         )}
         {userType === "company" && (
@@ -68,7 +68,7 @@ const Navbar = () => {
         )}
         {userType === "applicant" && (
           <li>
-            <Link to="/my-profile">Profilim</Link>
+            <Link to="/my-profile">Profile</Link>
           </li>
         )}
       </ul>
